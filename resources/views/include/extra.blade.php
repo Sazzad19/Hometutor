@@ -1,0 +1,13 @@
+<script src="./js/jquery.min.js"></script>
+  <script src="./js/modernizr.custom.js"></script>
+  <script src="./js/bootstrap.min.js"></script>
+  <script src="./js/slick.min.js"></script>
+  <script src="./js/scrollreveal.min.js"></script>
+  <script src="./js/jquery.cubeportfolio.min.js"></script>
+  <script src="./js/jquery.matchHeight-min.js"></script>
+  <script src="./js/masonry.pkgd.min.js"></script>
+  <script src="./js/jquery.flexslider-min.js"></script>
+  <script src="./js/classie.js"></script>
+  <script src="./js/helper.js"></script>
+  <script src="./js/grid3d.js"></script>
+  <script src="./js/script.js"></script>
