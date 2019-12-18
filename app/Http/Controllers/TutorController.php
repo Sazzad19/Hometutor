@@ -5,8 +5,9 @@ use Image;
 use App\Tutor;
 use App\Tuition;
 use App\Subject;
+use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash; 
 class TutorController extends Controller
 {
     /**
@@ -26,10 +27,7 @@ class TutorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function profile()
-    {
-    return view('pages.tutor.profile');
-    }
+  
 
     /**
      * Store a newly created resource in storage.
@@ -40,15 +38,19 @@ class TutorController extends Controller
     public function store(Request $request)
     {
 
+
       
 
-
+        $user=new User;
         $tutor=new Tutor;
+         $user->name=$request->name;
+         $user->email=$request->email;
+         $user->password= Hash::make($request->password);
+         $user->save();
 
-
-        $tutor->name=$request->name;
+        
+        $tutor->user_id=User::all()->last()->id;
         $tutor->username=$request->username;
-        $tutor->email=$request->email;
         $img=$request->photo;
         $image=time().'.'.$img->getClientOriginalExtension();
         $location='images/tutors/'.$image;
@@ -57,14 +59,27 @@ class TutorController extends Controller
         $tutor->gender=$request->gender;
         $tutor->areas=$request->area;
         $tutor->educational_qualification=$request->qualification;
+        $tutor->profession=$request->profession;
+        $file=$request->file('id_card');
+       
+        $file->store('public/files/tutor');
+        $tutor->id_card=$file;
         $tutor->experience_of_tuition=$request->experience;
         $tutor->current_tuition=$request->current_tuition;
+        $tutor->available_start_time=$request->available_start_time;
+        $tutor->available_end_time=$request->available_end_time;
+
         $tutor->expert_in=$request->expert_in;
         $tutor->phone_number=$request->phone_number;
-        $tutor->password= Hash::make($request->password);
+        
 
       
         $tutor->save();
+        $request->session()->put('login','true');
+        $request->session()->put('userid',$tutor->id);
+        $request->session()->put('userrole','tutor');
+       return redirect()->route('tutor.index');
+
         
     }
 

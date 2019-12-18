@@ -3,7 +3,11 @@
 @section('content')
 <div class="container">
 <h5 class="text-title">Request for Tutors</h5>
-
+ @if($message=Session::get('success'))
+ <div class="alert alert-success">
+  <p>{{$message}}</p>
+</div>
+    @endif
 <div class="row">
 <div class="col-md-8 mb-10">
     <div class="card">
@@ -15,15 +19,16 @@
                  <div class="card-body parent-request-form">
                    <form method="post" action="{{route('guardian.storetuition')}}" data-select2-id="19">
                                   {{ csrf_field() }}
+                                  <input type="text"  name="guardian_id" value="{{session()->get('userid')}}" hidden="1">
 
                                  <div class="form-group">
                                   <label for="exampleFormControlInput1">Title</label>
-                                   <input type="text" name="title" title="Enter title" value="" placeholder="Enter Title of the post" class="form-control poshytip">
+                                   <input type="text" name="title"  value="" placeholder="Enter Title of the post" class="form-control poshytip">
                                  </div>
 
                                  <div class="form-group">
-                                  <label for="exampleFormControlInput1">Name*</label>
-                                   <input type="text" name="s_fullName" title="Inter your full name" value="" placeholder="Type your Name" class="form-control poshytip">
+                                  <label for="exampleFormControlInput1">Student Name</label>
+                                   <input type="text" name="s_fullName"  value="" placeholder="Type Student Name" class="form-control poshytip">
                                  </div>
 
                                   <div class="form-row">

@@ -105,8 +105,8 @@
           </div>
         </div>
       </div>
-<div class="hire"><p>Hire a best tutor for your child</p>
-<button >Find Tutor(It's Free)</button></div>
+<div class="hire"><p>Search A Suitable Tuition For You</p>
+<button href="{{route('pages.registrationTU')}}">Search Tuition(It's Free)</button></div>
        <div class="features-section-2">
         <div class="container-fluid">
           <div class="row">
@@ -193,5 +193,5 @@
 
 
 <div class="hire"><p>Hire a best tutor for your child</p>
-<button>Find Tutor(It's Free)</button></div>
+<button><a  href="{{route('pages.registrationGS')}}">Find Tutor(It's Free)</a></button></div>
   </div>

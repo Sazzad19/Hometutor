@@ -27,8 +27,10 @@
 
 
 
-   <script src="https://sdk.accountkit.com/bn_IN/sdk.js?hash=ba25cb317094c73dcd6a56b11e9b5d7f" async="" crossorigin="anonymous"></script><script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-107514519-1"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+   <script src="https://sdk.accountkit.com/bn_IN/sdk.js?hash=ba25cb317094c73dcd6a56b11e9b5d7f" async="" crossorigin="anonymous"></script>
+   <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
+   <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-107514519-1"></script>
+   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
  
   </head>
 

@@ -6,12 +6,24 @@
               <h1>Hometutor.com</h1>
                   <p>A single place to find qualityful tutor and searching for parfect tuition.</p>
                     <div class="showcase-button">
-                      <a href="#features" class="button-style showcase-btn">
+                       @if(session()->get('userrole')=='guardian')
+                      <a  class="button-style showcase-btn" href="{{route('pages.registrationGS')}}">
                         Find Tutor
                       </a>
-                      <a href="#services" class="button-style showcase-btn">
+                      
+                       @elseif(session()->get('userrole')=='tutor')
+                      <a href="{{route('pages.registrationTU')}}" class="button-style showcase-btn">
                         Find Tution
                       </a>
+                      @else
+                       <a  class="button-style showcase-btn" href="{{route('pages.registrationGS')}}">
+                        Find Tutor
+                      </a>
+                       <a href="{{route('pages.registrationTU')}}" class="button-style showcase-btn">
+                        Find Tution
+                      </a>
+                      @endif
+
                 </div>
     		</div>
       </div>

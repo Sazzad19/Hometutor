@@ -26,7 +26,7 @@
                           <a href="#"><i class="fa fa-linkedin"></i></a>  
                           <a href="#"><i class="fa fa-facebook"></i></a> 
                         </div>
-                         <p class="contact-card">Contact</p>
+                         <a class="contact-card" href="{{route('guardian.tutor-details',$tutor->id)}}">Details</a>
                      </div>
 
                     </div>

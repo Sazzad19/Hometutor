@@ -8,36 +8,28 @@ use Illuminate\Http\Request;
 
 class TuitionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+  
+   public function tuitionlist($id)
     {
-        //
+        $tuition=Tuition::where('guardian_id',$id)->get();
+
+          $subject=Subject::all();
+   return view('pages.guardian.postedtuitions')->with('tuitions',$tuition)->with('subjects',$subject);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
    public function createtuition()
     {
           return view('pages.guardian.createtuition');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function storetuition(Request $request)
     {
         
  $tuition=new Tuition;
+ $tuition->guardian_id=$request->guardian_id;
  $tuition->title=$request->title;
  $tuition->s_fullName=$request->s_fullName;
  $tuition->s_gender=$request->s_gender;
@@ -66,6 +58,7 @@ $subject[$i]->tuition_id=$tuition;
 $subject[$i]->t_subject=$request->t_subject[$i];
 $subject[$i]->save();
 }
+return redirect()->route('guardian.createtuition')->with('success','Tuition Posted Successsfully');
     }
 
     /**

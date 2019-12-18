@@ -8,22 +8,34 @@
         <li>
           <a class="nav-link" href="{{route('index')}}">Home</a>
         </li>
+         @if(session()->get('userrole')=='guardian')
          <li>
-          <a class="nav-link" href="{{route('guardian.createtuition')}}">Hire a tutor</a>
+          <a class="nav-link" href="{{route('guardian.createtuition')}}">Post Your Tuition</a>
         </li>
+        @endif
+         @if(session()->get('userrole')=='guardian')
+        
+         <li>
+          <a class="nav-link" href="{{route('guardian.tuitionlist',session()->get('userid'))}}">Posted Tuitions</a>
+        </li>
+        @endif
+          @if(session()->get('userrole')=='guardian')
         <li>
-          <a class="nav-link" href="{{route('guardian.index')}}">Find A Tutor</a>
+          <a class="nav-link" href="{{route('guardian.index')}}">Hire a tutor</a>
         </li>
+        @endif
+          @if(session()->get('userrole')=='tutor')
         <li>
           <a class="nav-link" href="{{route('tutor.index')}}">Tuition Jobs</a> 
         </li>
-       
+       @endif
         <li>
           <a class="nav-link" href="{{route('blog.index')}}">Blog</a> 
         </li>
         <li>
           <a class="nav-link" href="{{route('contact')}}">Contact Us</a>
         </li>
+         @if(!(session()->get('login')))
         <li>
           <a class="nav-link" >Registration</a>
           <ul>
@@ -34,11 +46,22 @@
             <li><a class="nav-link" href="{{route('pages.registrationTU')}}">As Tutor</a></li>
           </ul>
         </li>
-       
+        @endif
+            @if((session()->get('login')))
+           <li>
+          <a class="nav-link" href="{{route('profile')}}">My Profile</a>
+        </li>
+        @endif
+       @if(!(session()->get('login')))
         <li>
           <a class="nav-link" href="{{route('login')}}">Login</a>
         </li>
-      
+      @endif
+       @if((session()->get('login')))
+        <li>
+          <a class="nav-link" href="{{route('logout')}}">LogOut</a>
+        </li>
+      @endif
       </ul>
     </div>
   </nav>

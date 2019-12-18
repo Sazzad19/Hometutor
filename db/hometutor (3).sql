@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2019 at 06:16 AM
+-- Generation Time: Dec 18, 2019 at 07:58 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.3
 
@@ -42,14 +42,12 @@ CREATE TABLE `guardianreviews` (
 
 CREATE TABLE `guardians` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(255) NOT NULL,
   `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `photo` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone_number` int(11) NOT NULL,
   `children` int(11) NOT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -58,13 +56,9 @@ CREATE TABLE `guardians` (
 -- Dumping data for table `guardians`
 --
 
-INSERT INTO `guardians` (`id`, `name`, `username`, `email`, `photo`, `address`, `phone_number`, `children`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Abdul Halim', 'Halim19', 'saku9628@gmail.com', '1568903180.jpg', 'Maijdee,Noakhali', 1789477764, 1, '10580997', '2019-09-19 08:26:20', '2019-09-19 08:26:20'),
-(2, 'Sazzad Shakil', 'Sazzad19', 'shakilahmedzx@gmail.com', '1568905976.jpg', 'Habiganj,Sylhet', 1789477764, 2, '$2y$10$WqROkpTDYDZkkGccMWM3Eeh/HzC08im9c7vftVECIfsnMPSnzY6M2', '2019-09-19 09:12:58', '2019-09-19 09:12:58'),
-(3, 'Abdul Momin', 'momin12', 'aakilaslamas@gmail.com', '1568969553.jpg', 'Habiganj,Sylhet', 1789477764, 3, '$2y$10$q9/bAO6DlPbf.XEMNQ0D0OI34kLMTjXYjZrUmVeowN80aKPCqtt9q', '2019-09-20 02:52:34', '2019-09-20 02:52:34'),
-(4, 'Masum', 'masum50', 'aakilaslamas@gmail.com', '1568996467.jpg', 'Maijdee,Noakhali', 1789477764, 2, '$2y$10$tHYYfLua8ZApsPCpwoztK.6DJYuaq7BwMzbNCeQ.twxOzcttkLZJy', '2019-09-20 10:21:07', '2019-09-20 10:21:07'),
-(5, 'Taifur Ahmed', 'shakilahmedzx@gmail.com', 'aakilaslam@gmail.com', '1574713334.jpg', 'Maijdee,Noakhali', 1789477764, 1, '$2y$10$Vt8BonWJXEPsgCjEa3tDpOdMYLE3ZKaGz31ytCXxinLMc4LMER/vu', '2019-11-25 14:22:16', '2019-11-25 14:22:16'),
-(6, 'Taifur Ahmed', 'taifur', 'shakilahmedzx@gmail.com', '1575009136.jpg', 'Maijdee,Noakhali', 1789477764, 2, '$2y$10$Sfg6n4DOFslaHBimVvD63Ozg6V3gY9AkI724uMzIV86FCODFLw94e', '2019-11-29 00:32:17', '2019-11-29 00:32:17');
+INSERT INTO `guardians` (`id`, `user_id`, `username`, `photo`, `address`, `phone_number`, `children`, `created_at`, `updated_at`) VALUES
+(11, 11, 'masum420', '1576520136.jpg', 'Maijdee,Noakhali', 1789477764, 2, '2019-12-16 12:15:36', '2019-12-16 12:15:36'),
+(12, 17, 'taifur20', '1576566142.jpg', 'Maijdee,Noakhali', 1789477764, 2, '2019-12-17 01:02:22', '2019-12-17 01:02:22');
 
 -- --------------------------------------------------------
 
@@ -83,8 +77,6 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2019_08_30_101153_create_tutors_table', 1),
 (4, '2019_08_30_101300_create_guardians_table', 1),
 (5, '2019_08_30_101332_create_students_table', 1),
@@ -157,7 +149,11 @@ CREATE TABLE `subjects` (
 
 INSERT INTO `subjects` (`id`, `tuition_id`, `t_subject`, `created_at`, `updated_at`) VALUES
 (1, 3, 'Accounting', '2019-10-13 01:25:30', '2019-10-13 01:25:30'),
-(2, 3, 'Agriculture', '2019-10-13 01:25:30', '2019-10-13 01:25:30');
+(2, 3, 'Agriculture', '2019-10-13 01:25:30', '2019-10-13 01:25:30'),
+(3, 4, 'Bangla', '2019-12-17 14:10:51', '2019-12-17 14:10:51'),
+(4, 4, 'Chemistry', '2019-12-17 14:10:51', '2019-12-17 14:10:51'),
+(5, 4, 'English', '2019-12-17 14:10:51', '2019-12-17 14:10:51'),
+(6, 5, 'English', '2019-12-17 14:47:41', '2019-12-17 14:47:41');
 
 -- --------------------------------------------------------
 
@@ -182,7 +178,7 @@ CREATE TABLE `tuitions` (
   `t_days` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `time` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `t_salary` int(11) NOT NULL,
-  `additional_info` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `additional_info` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `guardian_id` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -193,9 +189,11 @@ CREATE TABLE `tuitions` (
 --
 
 INSERT INTO `tuitions` (`id`, `title`, `s_fullName`, `s_gender`, `s_college`, `s_class`, `s_medium`, `g_phoneNumber`, `g_email`, `s_districts`, `s_area`, `s_address`, `t_gender`, `t_days`, `time`, `t_salary`, `additional_info`, `guardian_id`, `created_at`, `updated_at`) VALUES
-(1, 'RealMe', 'shadman sakib', 'Male', 'Noakhali Zilla School', 'Class V', 'English Medium', 1753345678, 'fafdfg@gmail.com', 2, NULL, 'dfsasdfads', 'Male', '4 Days/Week', '07:00:00', 2000, 'fddfdsfsdf', NULL, '2019-10-13 00:24:43', '2019-10-13 00:24:43'),
-(2, 'Javascript', 'shadman sakib', 'Male', 'Noakhali Zilla School', 'Class III', 'English Medium', 1753345678, 'fafdfg@gmail.com', 2, NULL, 'sdihasi', 'Male', '5 Days/Week', '06:00:00', 1000, '2 students', NULL, '2019-10-13 00:26:18', '2019-10-13 00:26:18'),
-(3, 'Need a Math Tutor', 'shadman sakib', 'Female', 'Noakhali Zilla School', 'Class V', 'English Medium', 1753345678, 'fafdfg@gmail.com', 2, NULL, 'Beside main road', 'Male', '4 Days/Week', '06:00:00', 2000, '2 students', NULL, '2019-10-13 01:25:30', '2019-10-13 01:25:30');
+(1, 'RealMe', 'shadman sakib', 'Male', 'Noakhali Zilla School', 'Class V', 'English Medium', 1753345678, 'fafdfg@gmail.com', 2, NULL, 'dfsasdfads', 'Male', '4 Days/Week', '07:00:00', 2000, 'fddfdsfsdf', 11, '2019-10-13 00:24:43', '2019-10-13 00:24:43'),
+(2, 'Javascript', 'shadman sakib', 'Male', 'Noakhali Zilla School', 'Class III', 'English Medium', 1753345678, 'fafdfg@gmail.com', 2, NULL, 'sdihasi', 'Male', '5 Days/Week', '06:00:00', 1000, '2 students', 11, '2019-10-13 00:26:18', '2019-10-13 00:26:18'),
+(3, 'Need a Math Tutor', 'shadman sakib', 'Female', 'Noakhali Zilla School', 'Class V', 'English Medium', 1753345678, 'fafdfg@gmail.com', 2, NULL, 'Beside main road', 'Male', '4 Days/Week', '06:00:00', 2000, '2 students', 12, '2019-10-13 01:25:30', '2019-10-13 01:25:30'),
+(4, 'Qualified Tutor Needed', 'Akib', 'Male', 'Noakhali Zilla School', 'Class IX', 'Bangla Medium', 1753345678, 'fafdfg@gmail.com', 12, NULL, 'Highway Road', 'Male', '3 Days/Week', '19:00:00', 4000, '2 Students', 12, '2019-12-17 14:10:51', '2019-12-17 14:10:51'),
+(5, 'English Tutor Needed', 'Sagor', 'Male', 'Noakhali Zilla School', 'Class VII', 'English Medium', 1753345678, 'fafdfg@gmail.com', 2, NULL, 'House Number:20', 'Male', '3 Days/Week', '20:00:00', 3000, '2 STUDENTS', 12, '2019-12-17 14:47:41', '2019-12-17 14:47:41');
 
 -- --------------------------------------------------------
 
@@ -217,18 +215,20 @@ CREATE TABLE `tutorreviews` (
 
 CREATE TABLE `tutors` (
   `id` int(10) UNSIGNED NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` int(255) NOT NULL,
   `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `photo` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gender` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `areas` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `educational_qualification` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profession` varchar(1000) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_card` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
   `experience_of_tuition` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `current_tuition` int(11) DEFAULT NULL,
+  `available_start_time` time DEFAULT NULL,
+  `available_end_time` time DEFAULT NULL,
   `expert_in` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone_number` int(11) NOT NULL,
-  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -237,12 +237,11 @@ CREATE TABLE `tutors` (
 -- Dumping data for table `tutors`
 --
 
-INSERT INTO `tutors` (`id`, `name`, `username`, `email`, `photo`, `gender`, `areas`, `educational_qualification`, `experience_of_tuition`, `current_tuition`, `expert_in`, `phone_number`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Raka', 'raka14', 'shakilahmedzx@gmail.com', '1569002822.jpg', 'female', 'Jassore', 'M.S.C', '2 YEARS', 1, 'Science', 1789477764, '$2y$10$LoDb0eWSVrqqWgTRq8Asx.9ZbaMYZlROChEOpXKZPj5nWXdE1aNNy', '2019-09-20 12:07:02', '2019-09-20 12:07:02'),
-(2, 'Masum', 'masum420', 'saku9628@gmail.com', '1569177589.jpg', 'male', 'Comilla', 'B.S.C(Running)', '2 years', 2, 'Mathemetics', 1789477764, '$2y$10$69Zyetw/tqckuoUAMPNEO.D7zHRN6rkDJcLhk0Z2fEIFdxFV34Oh2', '2019-09-22 12:39:49', '2019-09-22 12:39:49'),
-(3, 'Akib', 'akibmagi', 'shakilahmedzx@gmail.com', '1569179142.jpg', 'female', 'Rajshahi', 'M.B.BS', '1 year', 1, 'ICT', 1567845367, '$2y$10$h4AvGprJM.Nh3J7EY89fxuieddcQ0R4LPgx/JKMgrQrY8pmlrKVsq', '2019-09-22 13:05:43', '2019-09-22 13:05:43'),
-(4, 'Sakib', 'sakib430', 'saku9628@gmail.com', '1569180166.jpg', 'male', 'Barisal', 'B.S.C(Running)', '2 years', 1, 'Mathemetics', 1789477764, '$2y$10$sOqEg3gkmTb8qrR8cu0tWeGoGj.1ND/b9TobsYkk0V9DF7qIo7Kza', '2019-09-22 13:22:46', '2019-09-22 13:22:46'),
-(5, 'Sudipto', 'sudipto12', 'shakilahmedzx@gmail.com', '1569180255.jpeg', 'male', 'Khulna', 'M.B.B.S(Running)', '2 years', 2, 'Biology', 1567845367, '$2y$10$D2kAIDTIcrSeQX3aTXUZKOW5aFHk.FykaFlCz1WWyOgC2q.CbHnxG', '2019-09-22 13:24:15', '2019-09-22 13:24:15');
+INSERT INTO `tutors` (`id`, `user_id`, `username`, `photo`, `gender`, `areas`, `educational_qualification`, `profession`, `id_card`, `experience_of_tuition`, `current_tuition`, `available_start_time`, `available_end_time`, `expert_in`, `phone_number`, `created_at`, `updated_at`) VALUES
+(28, 14, 'Sazzad19', '1576564737.jpg', 'male', 'Sylhet', 'B.SC.(Running)', 'Student', '', '2 years', 2, '19:00:00', '21:00:00', 'ICT', 1789477764, '2019-12-17 00:38:57', '2019-12-17 00:38:57'),
+(29, 16, 'sharmin20', '1576565311.jpg', 'male', 'Jassore', 'B.SC.(Running)', 'Student', '', '2 years', 2, '19:00:00', '21:00:00', 'Mathemetics', 1789477764, '2019-12-17 00:48:31', '2019-12-17 00:48:31'),
+(30, 18, 'Sohelimam', '1576569425.jpg', 'male', 'Sylhet', 'B.S.C', 'Teacher', '', '2 years', 2, '19:00:00', '21:00:00', 'ICT', 1789477764, '2019-12-17 01:57:06', '2019-12-17 01:57:06'),
+(33, 27, 'salah420', '1576684550.jpg', 'male', 'Sylhet', 'B.SC.(Running)', 'Teacher', 'C:\\xampp\\tmp\\phpF903.tmp', '2 years', 2, '19:00:00', '21:00:00', 'Mathemetics', 1789477764, '2019-12-18 09:55:50', '2019-12-18 09:55:50');
 
 -- --------------------------------------------------------
 
@@ -260,6 +259,18 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(11, 'Masum Billah', 'saku9628@gmail.com', NULL, '$2y$10$JLa8dX3yxY47/Qw9gCG3l...Eo5QF/hsMD84vKFS34w4hZynOizvO', NULL, '2019-12-16 12:15:35', '2019-12-16 12:15:35'),
+(14, 'Sazzad Shakil', 'aakilaslam@gmail.com', NULL, '$2y$10$ysCkwjWayeAh00.rclSpc.9KufdE2ZpWKUCzRV2DOTZkCm/ab7LHq', NULL, '2019-12-17 00:38:57', '2019-12-17 00:38:57'),
+(16, 'Sharmin', 'shakilahmedzx@gmail.com', NULL, '$2y$10$66gyKUzNS3CrVdQP.eKZteA1NKUl6HWzR8MqTOPf3WdbSpBl/Rdhi', NULL, '2019-12-17 00:48:31', '2019-12-17 00:48:31'),
+(17, 'Taifur Ahmed', 'taifur@gmail.com', NULL, '$2y$10$uhLQI33zcLIFJl9hc2R0ku77KbimeHw91XFOf7LHBf1j8fMsMJuIW', NULL, '2019-12-17 01:02:21', '2019-12-17 01:02:21'),
+(18, 'Soheli Mam', 'sohelisoha@gmail.com', NULL, '$2y$10$V7k.Bd7DUNeJf.dV1lGLo.vN1AC687ZyLAJsid2UHRcjnLKXB1kh6', NULL, '2019-12-17 01:57:05', '2019-12-17 01:57:05'),
+(27, 'Salah Uddin', 'naylamerrry40720@gmail.com', NULL, '$2y$10$bRtxUNkeGPJT3Hhb5CX4Y.OfNN6xQ4Bjp/.eFq.r7Vpsm/uApiVs2', NULL, '2019-12-18 09:55:50', '2019-12-18 09:55:50');
 
 --
 -- Indexes for dumped tables
@@ -340,7 +351,7 @@ ALTER TABLE `guardianreviews`
 -- AUTO_INCREMENT for table `guardians`
 --
 ALTER TABLE `guardians`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -358,13 +369,13 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tuitions`
 --
 ALTER TABLE `tuitions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tutorreviews`
@@ -376,13 +387,13 @@ ALTER TABLE `tutorreviews`
 -- AUTO_INCREMENT for table `tutors`
 --
 ALTER TABLE `tutors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

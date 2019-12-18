@@ -14,14 +14,19 @@
 Route::get('/','PageController@index')->name('index');
 Route::get('/contact','PageController@contact')->name('contact');
 Route::get('/login','PageController@login')->name('login');
+Route::post('/login-post','PageController@loginpost')->name('login.post');
+Route::get('/logout','PageController@logout')->name('logout');
 
+Route::get('/my-profile','ProfileController@profile')->name('profile');
+Route::post('/send','SendEmailController@sendemail')->name('sendemail');
+Route::get('/email','SendEmailController@index')->name('email');
 
 
 Route::group(['prefix'=>'pages'],function(){
 
 Route::group(['prefix'=>'tutor'],function(){
 
-Route::get('/tutor-login','TutorController@login')->name('tutor.login');
+
 
 Route::get('/tutor-tuitions','TutorController@index')->name('tutor.index');
 
@@ -33,15 +38,14 @@ Route::get('/tutor-profile','TutorController@profile')->name('tutor.profile');
 
 Route::group(['prefix'=>'guardian'],function(){
 
-Route::get('/guardian-login','GuardianController@login')->name('guardian.login');	
+	
 Route::get('/guardian-tutors','GuardianController@index')->name('guardian.index');
 
 Route::post('/guardian-store','GuardianController@store')->name('guardian.store');
 
-Route::get('/tutor-details','GuardianController@details')->name('guardian.tutor-details');
-
+Route::get('/tutor-details/{id}','GuardianController@tutordetails')->name('guardian.tutor-details');
 Route::get('/guardian-profile','GuardianController@profile')->name('guardian.profile');
-
+Route::get('/tuitionlist/{id}','TuitionController@tuitionlist')->name('guardian.tuitionlist');
 Route::get('/createtuition','TuitionController@createtuition')->name('guardian.createtuition');
 Route::post('/storetuition','TuitionController@storetuition')->name('guardian.storetuition');
 Route::get('/edittuition','TuitionController@edittuition')->name('guardian.edittuition');

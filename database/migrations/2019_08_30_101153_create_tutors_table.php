@@ -22,9 +22,12 @@ class CreateTutorsTable extends Migration
                       $table->string('gender');
                         $table->string('areas');
                           $table->string('educational_qualification');
-                            $table->string('experience_of_tuition');
+                           $table->string('profrssion');
+                             $table->string('experience_of_tuition');
                               $table->integer('current_tuition')->nullable();
-                                $table->string('expert_in');
+                               $table->time('available_start_time')->nullable();
+                                $table->time('available_end_time')->nullable();
+                                 $table->string('expert_in');
                                   $table->integer('phone_number');
                                     $table->string('password');
                                       $table->timestamps();

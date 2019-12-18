@@ -46,17 +46,31 @@
                                             <label>Area</label>
                                             <input type="text" class="form-control" placeholder="Enter Area" name="area" />
                                         </div>
-                                       
-
-
-                                    </div>
-                                    <div class="col-md-6">
                                         <div class="form-group">
                                             <label>Educational Qualification</label>
                                             <input type="text" class="form-control" placeholder="Enter your qualification" name="qualification" />
                                         </div>
+                                        <div class="form-group">
+                                            <label>Profession</label>
+                                            <select type="text" class="form-control"  name="profession">
+                                                 <option value="">Select Your Profession</option>
+                                                <option value="Teacher">Teacher</option>
+                                                <option value="Student">Student</option>
+                                                 <option value="Employee">Employee</option>
+
+                                            </select>
+                                        </div>
+                                         <div class="form-group">
+                                            <label>National ID Card<small>(Clear Image is Recommanded)</small></label>
+                                            <input type="file" class="form-control" name="id_card" />
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        
                                        <div class="form-group">
-                                            <label>Experience oF Tuition</label>
+                                            <label>Experience of Tuition</label>
                                             <input type="text" class="form-control" placeholder="Enter your experience" name="experience" />
                                         </div>
 
@@ -68,6 +82,17 @@
                                             <label>Expert in</label>
                                             <input type="text" class="form-control" placeholder="Enter Expert field" name="expert_in" />
                                         </div>
+                                          <div class="form-group">
+                                            <label>Available Start Time</label>
+                                            <input type="time" class="form-control"  name="available_start_time"  min="01:00" max="24:00"/>
+                                        </div>
+                                          <div class="form-group">
+                                            <label>Available End Time</label>
+                                            <input type="time" class="form-control"  name="available_end_time"  min="01:00" max="24:00"/>
+                                        </div>
+
+
+
                                          <div class="form-group">
                                             <label>Phone Number</label>
                                             <input type="text" class="form-control" placeholder="Enter phone number" name="phone_number" />
