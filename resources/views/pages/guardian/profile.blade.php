@@ -13,7 +13,7 @@
                     <div class="col-md-4">
                         <div class="profile-img">
                        
-                            <img src="{{asset('images/tutors/'.$tutor->photo)}}" alt=""/>
+                            <img src="{{asset('images/guardians/'.$guardian->photo)}}" alt=""/>
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
@@ -28,29 +28,65 @@
                                     <h6>
                                         {{$guardian->profession}}
                                     </h6>
-                                    <p class="proile-rating">RATTING : <span>8/10</span></p>
+                              @if(count($guardian->guardianreviews)!=0)
+                                    @php
+                                    $j=0;
+                                    $x=0;
+                                     
+                                    @endphp
+                                     @foreach($guardian->guardianreviews as $guardianreview)
+                                    @php
+                                     $x=$x+$guardianreview->ratting;
+                                     $j++;
+                                     @endphp
+
+                                     @endforeach
+                                      @php
+                                   $y=round($x/$j);
+
+                                    @endphp
+                                    @else
+                                    @php
+                                    $y=0;
+                                    @endphp
+
+                                    @endif
+
+                               
+
+
+
+
+
+                                    <p class="proile-rating">RATTING : <span>{{$y}}/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
 
                                  <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tuition Information</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"> Children Information</a>
                                 </li>
+                                 @if(session()->get('userrole')=='tutor')
+
+                                 <li class="nav-item">
+                                    <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Reviews</a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
-                    @if(session()->get('userrole')=='tutor')
+                    @if(session()->get('userrole')=='guardian')
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Edit Profile</button>
                     </div>
                     @endif
                 </div>
                 <div class="row">
                     <div class="col-md-4">
-                       
+
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
@@ -58,7 +94,7 @@
                                                 <label>User Id</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{$tutor->user_id}}</p>
+                                                <p>{{$guardian->user_id}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -66,39 +102,33 @@
                                                 <label>Username</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{$tutor->username}}</p>
+                                                <p>{{$guardian->username}}</p>
                                             </div>
                                         </div>
-                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Gender</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>{{$tutor->gender}}</p>
-                                            </div>
-                                        </div>
+                                  
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Profession</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{$tutor->profession}}</p>
+                                                <p>{{$guardian->profession}}</p>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                         <div class="row">
                                             <div class="col-md-6">
-                                                 <label>Educational Qualification</label>
+                                                <label>Address</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{$tutor->educational_qualification}}</p>
+                                                <p>{{$guardian->address}}</p>
                                             </div>
                                         </div>
+                                       
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{$tutor->user->email}}</p>
+                                                <p>{{$guardian->user->email}}</p>
                                             </div>
                                         </div>
                                          <div class="row">
@@ -106,190 +136,271 @@
                                                 <label>Phone Number</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{$tutor->phone_number}}</p>
+                                                <p>0{{$guardian->phone_number}}</p>
                                             </div>
                                         </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                              @php
+                              $i=0;
+                              @endphp
+                             @foreach ($guardian->students as $student)
+                                @php
+                              $i++;
+                              @endphp
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Expert In</label>
+                                                <label>Children No</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{$tutor->expert_in}}</p>
+                                                <p>{{$i}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{$student->name}}</p>
                                             </div>
                                         </div>
                                          <div class="row">
                                             <div class="col-md-6">
-                                                <label>Tuition Area</label>
+                                                <label>Username</label>
                                                 </div>
                                             <div class="col-md-6">
-                                                <p>{{$tutor->areas}}</p>
+                                                <p>{{$student->username}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Exparience</label>
+                                                <label>Email</label>
                                                 </div>
                                             <div class="col-md-6">
-                                                <p>{{$tutor->experience_of_tuition}}</p>
+                                                <p>{{$student->email}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Current Tuitions</label>
+                                                <label>Gender</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{$tutor->current_tuition}}</p>
+                                                <p>{{$student->gender}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <label>Available Time</label>
+                                                <label>Class</label>
                                             </div>
                                             <div class="col-md-6">
                                             
                                                
-                                                <p>{{$tutor->available_start_time}} To {{$tutor->available_end_time}} </p>
+                                                <p>{{$student->class}} </p>
+                                            
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Medium</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                            
+                                               
+                                                <p>{{$student->medium}} </p>
                                             
                                                 
                                             </div>
                                         </div>
 
+                                         <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Educational Institution</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                            
+                                               
+                                                <p>{{$student->educational_institution}} </p>
+                                            
+                                                
+                                            </div>
+                                        </div>
+                                         <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Academic Result</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                            
+                                               
+                                                <p>{{$student->academic_result}} </p>
+                                            
+                                                
+                                            </div>
+                                        </div>
+                                        @endforeach
+
 
                                        
                           
                             </div>
-                              <div class="row">
-    <div class="col-md-6">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-Recruit
-</button>
-    </div>
+                             @if(session()->get('userrole')=='tutor')
+                             <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                                <div class="row">
+                                            <div class="col-md-6">
+ <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#feedback">Your Feedback</button>
+                                            </div>
                                            
-                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Feedbacks</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Ratting<small>(Out of 10)</small></p>
+                                            </div>
+                                        </div>
+                                          @php
+                                        $j=0;
+                                        @endphp
+                                     @foreach ($guardian->guardianreviews as $guardianreview)
+                                      @php
+                                     $j++;
+                                     @endphp
+                                <div class="row">
+                                            <div class="col-md-6">
+                                                <label>{{$j}}.   {{$guardianreview->feedback}}</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{$guardianreview->ratting}}</p>
+                                            </div>
+                                        </div>
+                                        @endforeach
+
+
+
+
+
                         </div>
+                        @endif
 
                     </div>
 
                 </div>
-               
+               </div>
            
 
             </form> 
-
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Send Email</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-       <form  action="{{route('sendemail')}}" method="post"  >
+       <form  action="{{route('guardian.updateprofile',$guardian->id)}}" method="post"  >
                                   {{ csrf_field() }}
 
                              <div class="modal-body">
                                 <div class="form-group">
-                                <label style="font-weight: bold;">To</label>
-                                 <input type="text" name="to" value="{{$tutor->user->email}}"  class="form-control ">
+                                <label style="font-weight: bold;">Name</label>
+                                 <input type="text" name="name" value="{{$guardian->user->name}}"  class="form-control ">
                              
                                </div>
-                                 <div class="form-group">
-                                <label style="font-weight: bold;">Message</label>
-                                
-                             
-                               </div>
+                         
 
         
                                 <div class="form-group">
-                                <label>Class</label>
-                                 <input type="text" name="class" value=""  class="form-control ">
+                                <label>Username</label>
+                                 <input type="text" name="username" value="{{$guardian->username}}"  class="form-control ">
                              
                                </div>
                                <div class="form-group">
-                                <label>Subject</label>
-                                 <input type="text" name="subject" value=""  class="form-control ">
+                                <label>Profession</label>
+                                 <input type="text" name="profession" value="{{$guardian->profession}}"  class="form-control ">
                              
                                </div>
 
-                                <div class="form-group">
-                                <label>Student Institute</label>
-                                 <input type="text" name="institute" value=""  class="form-control ">
-                             
-                               </div>
                                 
 
-                                  <div class="form-row">
-                                    <div class="form-group col-md-6">
-                                      <label>Select Student Gender</label>
-                                       <select name="gender" class="form-control">
-                                        <option value="">Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                       </select>
-                                     </div>
+                                 
+                                    <div class="form-group">
+                                <label>Phone Number</label>
+                                 <input type="text" name="phone_number" value="{{$guardian->phone_number}}"  class="form-control ">
+                             
+                               </div>
+                                <div class="form-group">
+                                <label>Address</label>
+                                 <input type="text" name="address" value="{{$guardian->address}}"  class="form-control ">
+                             
+                               </div>
+                            
 
-                                      <div class="form-group col-md-6">
-                                        <label>Select Student Medium</label>
-                                         <select name="medium" class="form-control medium">
-                                          <option value="">Select Medium</option>
-                                          <option value="Bangla Medium">Bangla Medium</option>
-                                          <option value="English Medium">English Medium</option>
-                                          <option value="English Version">English Version</option>
-                                          <option value="Arabic Medium">Arabic Medium</option>
-                                         </select>
-                                      </div>
-                                    </div>
-
-                                    
-
-                                           <div class="form-group">
-                                          <label>Location Details</label>
-                                           <textarea name="location" rows="2" class="form-control"></textarea>
-                                         </div>
-                                        <div class="form-row">
-
-                                          <div class="form-group col-md-6">
-                                           <label>Days Per Week</label>
-                                             <select name="days" class="form-control days">
-                                              <option value="">Please select your Day</option> <option value="1 Day/Week">1 Day/Week</option> <option value="2 Days/Week">2 Days/Week</option> <option value="3 Days/Week">3 Days/Week</option> <option value="4 Days/Week">4 Days/Week</option> <option value="5 Days/Week">5 Days/Week</option> <option value="6 Days/Week">6 Days/Week</option> <option value="7 Days/Week">7 Days/Week</option></select>
-                                          </div>
-
-                                          <div class="form-group col-md-6">
-                                             <label>Tutoring Time</label>
-                                                 <input type="text" name="time" value=""  class="form-control ">
-                                            </div>
-                                          </div>
-
-                                          
-
-                                         
-
-                                              <div class="form-group">
-                                          <label for="locationDetails">Additional Information(If multiple students mention here)</label>
-                                           <textarea name="additional_info" rows="2" class="form-control"></textarea>
-                                         </div>
-                              
-
-
-                                             
-                                            
-
-
+                                                
 
     
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" >Send</button>
+        <button type="submit" class="btn btn-primary" >Update</button>
       </div>
       </form>
     </div>
   </div>
 </div>
-                   
-        </div>
 
+<div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Your Feedback</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <form  action="{{route('tutor.feedback')}}" method="post"  >
+                                  {{ csrf_field() }}
+
+                             <div class="modal-body">
+                                 <input type="text" name="guardian_id" hidden="1" class="form-control " value="{{$guardian->id}}">
+
+                                <div class="form-group">
+                                <label style="font-weight: bold;">Feedback</label>
+                              <textarea type="text" name="feedback"   class="form-control "></textarea>   
+                               </div>
+                         
+
+        
+                                <div class="form-group">
+                                <label  style="font-weight: bold;">Ratting</label>
+                                 <input type="text" name="ratting"  class="form-control ">/10
+                             
+                               </div>
+                             
+
+                                
+
+                            
+                           
+                            
+
+                                                
+
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" >Save</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+                     
+          
+        </div>
+  
+
+       
         @endsection

@@ -29,6 +29,10 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->from('shakilahmedzx@gmail.com')->subject('Tutor Request')->view('pages.email')->with('data',$this->data);
+          if(session()->get('userrole')=='guardian'){
+        return $this->from('shakilahmedzx@gmail.com')->subject('Tutor Request')->view('pages.email')->with('data',$this->data);}
+        
+         if(session()->get('userrole')=='tutor'){
+        return $this->from('shakilahmedzx@gmail.com')->subject('Tuition Request')->view('pages.email_to_guardian')->with('data',$this->data);}
     }
 }

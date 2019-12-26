@@ -12,9 +12,15 @@ class TutorreviewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+  public function storefeedback(Request $request)
     {
-        //
+    $tutorreviews= new Tutorreviews();
+    $tutorreviews->tutor_id=$request->tutor_id;
+    $tutorreviews->ratting=$request->ratting;
+    $tutorreviews->feedback=$request->feedback;
+    $tutorreviews->save();
+
+        return redirect()->back();
     }
 
     /**

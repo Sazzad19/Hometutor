@@ -16,7 +16,7 @@
          @if(session()->get('userrole')=='guardian')
         
          <li>
-          <a class="nav-link" href="{{route('guardian.tuitionlist',session()->get('userid'))}}">Posted Tuitions</a>
+          <a class="nav-link" href="{{route('guardian.tuitionlist',session()->get('userid'))}}">My Posted Tuitions</a>
         </li>
         @endif
           @if(session()->get('userrole')=='guardian')

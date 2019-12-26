@@ -62,7 +62,19 @@
                                         </div>
                                          <div class="form-group">
                                             <label>National ID Card<small>(Clear Image is Recommanded)</small></label>
-                                            <input type="file" class="form-control" name="id_card" />
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                     <label>Front Part</label>
+                                                     <div><label></label></div>
+                                                      <label>Back Part</label>
+
+                                                    
+                                                </div>
+                                          <div class="col-md-8">
+                                         <input type="file" class="form-control" name="id_card_front_part" />
+                                         <input type="file" class="form-control" name="id_card_back_part" />
+                                         </div>
+                                            </div>
                                         </div>
 
 

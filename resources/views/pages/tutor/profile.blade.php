@@ -3,7 +3,7 @@
 @section('content')
 <div class="container emp-profile">
 
-    @if($message=Session::get('success'))
+    @if($message=Session::get('success')) 
  <div class="alert alert-success">
   <p>{{$message}}</p>
 </div>
@@ -14,12 +14,14 @@
                     <div class="col-md-4">
                         <div class="profile-img">
                        
-                            <img src="{{asset('images/tutors/'.$tutor->photo)}}" alt=""/>
+                            <img src="{{asset('images/tutors/'.$tutor->photo)}}" alt="Profile Picture" style="height: 160px; width:245px;" />
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
                             </div>
                         </div>
+                        
+
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
@@ -29,7 +31,30 @@
                                     <h6>
                                         {{$tutor->profession}}
                                     </h6>
-                                    <p class="proile-rating">RATTING : <span>8/10</span></p>
+                                    @if(count($tutor->tutorreviews)!=0)
+                                    @php
+                                    $j=0;
+                                    $x=0;
+                                     
+                                    @endphp
+                                     @foreach($tutor->tutorreviews as $tutorreview)
+                                    @php
+                                     $x=$x+$tutorreview->ratting;
+                                     $j++;
+                                     @endphp
+
+                                     @endforeach
+                                      @php
+                                   $y=round($x/$j);
+
+                                    @endphp
+                                    @else
+                                    @php
+                                    $y=0;
+                                    @endphp
+
+                                    @endif
+                                    <p class="proile-rating">RATTING : <span>{{$y}}/10</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -38,20 +63,39 @@
                                  <li class="nav-item">
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tuition Information</a>
                                 </li>
+                                 @if(session()->get('userrole')=='guardian')
+
+                                 <li class="nav-item">
+                                    <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Reviews</a>
+                                </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
                     @if(session()->get('userrole')=='tutor')
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit Profile</button>
+                    </div>
+                    @endif
+                      @if(session()->get('userrole')=='guardian')
+                    <div class="col-md-2">
+                        <input type="button" onclick="window.location.href='{{route('guardian.profilePDF',$tutor->id)}}'" class="profile-edit-btn" name="btnAddMore" value="Download PDF"/>
                     </div>
                     @endif
                 </div>
                 <div class="row">
                     <div class="col-md-4">
+                       @if(session()->get('userrole')=='guardian')
+                       <div class="profile-img">
+                       
+                            <img src="{{asset('images/tutors/Id_card/'.$tutor->id_card_front_part)}}" alt=""/>
+                             <img src="{{asset('images/tutors/Id_card/'.$tutor->id_card_back_part)}}" alt=""/>
+                           
+                        </div>
+                        @endif
                        
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <div class="tab-content profile-tab" id="myTabContent">
                             <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
@@ -155,24 +199,62 @@
                                             
                                                 
                                             </div>
-                                        </div>
-
+                                       </div>
+                   
 
                                        
                           
                             </div>
-                            @if(session()->get('userrole')=='guardian')
-                              <div class="row">
-    <div class="col-md-6">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-Recruit
-</button>
-    </div>
+
+
+
+
+
+                                            @if(session()->get('userrole')=='guardian')
+                             <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                                <div class="row">
+                                            <div class="col-md-6">
+ <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#feedback">Your Feedback</button>
+                                            </div>
                                            
-                            </div>
-                            @endif
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Feedbacks</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>Ratting<small>(Out of 10)</small></p>
+                                            </div>
+                                        </div>
+                                          @php
+                                        $j=0;
+                                        @endphp
+                                     @foreach ($tutor->tutorreviews as $tutorreview)
+                                      @php
+                                     $j++;
+                                     @endphp
+                                <div class="row">
+                                            <div class="col-md-6">
+                                                <label>{{$j}}.   {{$tutorreview->feedback}}</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{$tutorreview->ratting}}</p>
+                                            </div>
+                                        </div>
+                                        @endforeach
+
+
+
+
+
+                        </div>
+                        @endif
+ 
                         </div>
 
+                    </div>
+                     <div class="col-md-2">
+                       
                     </div>
 
                 </div>
@@ -180,6 +262,8 @@ Recruit
            
 
             </form> 
+
+             
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -190,7 +274,7 @@ Recruit
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-       <form  action="{{route('sendemail')}}" method="post"  >
+       <form  action="{{route('sendemailtutor')}}" method="post"  >
                                   {{ csrf_field() }}
 
                              <div class="modal-body">
@@ -292,6 +376,166 @@ Recruit
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Your Feedback</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <form  action="{{route('guardian.feedback')}}" method="post"  >
+                                  {{ csrf_field() }}
+
+                             <div class="modal-body">
+                                 <input type="text" name="tutor_id" hidden="1" class="form-control " value="{{$tutor->id}}">
+
+                                <div class="form-group">
+                                <label style="font-weight: bold;">Feedback</label>
+                              <textarea type="text" name="feedback"   class="form-control "></textarea>   
+                               </div>
+                         
+
+        
+                                <div class="form-group">
+                                <label  style="font-weight: bold;">Ratting</label>
+                                 <input type="text" name="ratting"  class="form-control ">/10
+                             
+                               </div>
+                      
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" >Save</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <form  action="{{route('tutor.updateprofile',$tutor->id)}}" method="post"  >
+                                  {{ csrf_field() }}
+
+                             <div class="modal-body">
+                                <div class="form-group">
+                                <label>Name</label>
+                                 <input type="text" name="name" value="{{$tutor->user->name}}"  class="form-control ">
+                             
+                               </div>
+                         
+
+        
+                                <div class="form-group">
+                                <label>Username</label>
+                                 <input type="text" name="username" value="{{$tutor->username}}"  class="form-control ">
+                             
+                               </div>
+                              
+                               <div class="form-group">
+                                <label>Profession</label>
+                                       <select type="text" class="form-control"  name="profession">
+                                 <option value="{{$tutor->profession}}" selected="1">{{$tutor->profession}}</option>
+                                <option value="Teacher">Teacher</option>
+                                <option value="Student">Student</option>
+                                 <option value="Employee">Employee</option>
+
+                                            </select>
+                             
+                               </div>
+
+                               <div class="form-group">
+                                <label>Educatonal Qualification</label>
+                                 <input type="text" name="educational_qualification" value="{{$tutor->educational_qualification}}"  class="form-control ">
+                             
+                               </div>
+
+                               <div class="form-group">
+                                <label>Phone Number</label>
+                                 <input type="text" name="phone_number" value="{{$tutor->phone_number}}"  class="form-control ">
+                             
+                               </div>
+
+                               <div class="form-group">
+                                <label>Expert In</label>
+                                 <input type="text" name="expert_in" value="{{$tutor->expert_in}}"  class="form-control ">
+                             
+                               </div>
+
+                              
+                                <div class="form-group">
+                                <label>Area</label>
+                                 <input type="text" name="areas" value="{{$tutor->areas}}"  class="form-control ">
+                             
+                               </div>
+
+                                <div class="form-group">
+                                <label>Experience of Tuition</label>
+                                 <input type="text" name="experience_of_tuition" value="{{$tutor->experience_of_tuition}}"  class="form-control ">
+                             
+                               </div>
+                                <div class="form-group">
+                                <label>Current Tuition</label>
+                                 <input type="text" name="current_tuition" value="{{$tutor->current_tuition}}"  class="form-control ">
+                             
+                               </div>
+                                <div class="form-group">
+                                <label>Available  Start Time</label>
+                                 <input type="text" name="available_start_time" value="{{$tutor->available_start_time}}"  class="form-control ">
+                             
+                               </div>
+
+                                    <div class="form-group">
+                                <label>Available  End Time</label>
+                                 <input type="text" name="available_end_time" value="{{$tutor->available_end_time}}"  class="form-control ">
+                             
+                               </div>
+
+                                </div>
+                           
+                            
+
+                                                
+
+    
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" >Update</button>
+      </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
+ @if(session()->get('userrole')=='guardian')
+                  <div class="row">
+                    <div class="col-md-4">
+                    </div>
+
+            <div class="col-md-6">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Recruit
+            </button>
+            </div>
+            <div class="col-md-2">
+                
+
+                    </div>
+                   
+                            </div>
+                            @endif
                    
         </div>
 

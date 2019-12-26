@@ -14,7 +14,10 @@ class CreateTutorreviewsTable extends Migration
     public function up()
     {
         Schema::create('tutorreviews', function (Blueprint $table) {
-            $table->bigIncrements('id');
+             $table->increments('id');
+             $table->integer('tutor_id');
+              $table->integer('ratting');
+               $table->text('feedback');
             $table->timestamps();
         });
     }

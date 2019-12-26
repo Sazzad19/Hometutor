@@ -19,9 +19,10 @@ class CreateGuardiansTable extends Migration
                 $table->string('username');
                   $table->string('email');
                     $table->string('photo');
+                     $table->string('profession');
                       $table->string('address');
                        $table->integer('phone_number');
-                         $table->integer('children');
+                       
                           $table->string('password');
                            $table->timestamps();
         });

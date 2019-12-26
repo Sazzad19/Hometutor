@@ -45,9 +45,14 @@
                                             <label>Photo</label>
                                             <input type="file" class="form-control" name="photo" />
                                         </div>
+                                      
                                 
                                     </div>
                                     <div class="col-md-6">
+                                         <div class="form-group">
+                                            <label>Profession</label>
+                                            <input type="text" class="form-control" placeholder="Enter Profession*" name="profession" />
+                                        </div> 
                                         <div class="form-group">
                                             <label>Address</label>
                                             <input type="text" class="form-control" placeholder="Enter Address*" name="address" />
@@ -57,15 +62,7 @@
                                             <input type="text" minlength="11" maxlength="11" name="phone_number" class="form-control" placeholder="Enter Phonenumber*" />
                                         </div>
 
-                                         <div class="form-group">
-                                            <label>Your Children</label>
-                                            <select class="form-control" name="children">
-                                                <option class="hidden"  selected disabled>Select</option>
-                                                <option value="1">Masum</option>
-                                                <option value="2">Akib</option>
-                                                <option value="3">Taifur</option>
-                                            </select>
-                                        </div>
+                                     
                                         <div class="form-group">
                                              <label>Password</label>
                                             <input type="password" class="form-control" placeholder="Enter Password*" name="password"  />
@@ -101,8 +98,8 @@
                                             <label>Medium</label>
                                             <select class="form-control" name="medium">
                                                 <option class="hidden"  selected disabled>Select</option>
-                                                <option value="1">Bangla</option>
-                                                <option value="2">English</option>
+                                                <option value="Bangla">Bangla</option>
+                                                <option value="English">English</option>
                                             </select>
                                         </div>
 

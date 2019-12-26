@@ -12,10 +12,17 @@ class GuardianreviewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+  public function storefeedback(Request $request)
     {
-        //
+    $guardianeviews= new Guardianreviews();
+    $guardianeviews->guardian_id=$request->guardian_id;
+    $guardianeviews->ratting=$request->ratting;
+    $guardianeviews->feedback=$request->feedback;
+    $guardianeviews->save();
+
+        return redirect()->back();
     }
+
 
     /**
      * Show the form for creating a new resource.

@@ -39,7 +39,7 @@
 					<div class="row">
 						<div class="col-md">
 							<h6>
-								<i class="fa fa-map-marker fa-lg"::before></i>{{$tuition->s_medium}},{{$tuition->time}}
+								<i class="fa fa-map-marker fa-lg"::before></i>{{$tuition->s_area}},{{$tuition->s_districts}}
 							</h6>
 						</div>
 						<div class="col-md"><a href="#" class="btn btn-sm btn-custom text-light pull-right"><i class="fa fa-link"></i> Details tuition

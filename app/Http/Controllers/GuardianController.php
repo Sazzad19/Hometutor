@@ -5,13 +5,14 @@ use Image;
 use App\Guardian;
 use App\Tutor;
 use App\User;
-
+use App\Guardianreviews;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use PDF;
 
 class GuardianController extends Controller
 {
-   
+  
     public function index()
     {
       $tutor=Tutor::all();
@@ -56,10 +57,11 @@ class GuardianController extends Controller
         $location='images/guardians/'.$image;
         Image::make($img)->save($location);
         $guardian->photo=$image;
+         $guardian->profession=$request->profession;
 
         $guardian->address=$request->address;
         $guardian->phone_number=$request->phone_number;
-        $guardian->children=$request->children;
+        
        
       
         $guardian->save();
@@ -76,6 +78,43 @@ class GuardianController extends Controller
          $tutor=Tutor::where('id',$id)->first();  
    return view('pages.tutor.profile')->with('tutor',$tutor);
        }
+
+ public function printPDF($id)
+    {
+ set_time_limit(300);
+       $tutor=Tutor::where('id',$id)->first();
+
+
+
+
+      $data=[
+       
+        'name'=> $tutor->user->name,
+         'email'=> $tutor->user->email,
+          'userid'=> $tutor->user_id,
+          'username'=> $tutor->username,
+           'photo'=> $tutor->photo,
+            'gender'=> $tutor->gender,
+             'areas'=> $tutor->areas,
+              'educational_qualification'=> $tutor->educational_qualification,
+               'profession'=> $tutor->profession,
+               
+                  
+                     'experience_of_tuition'=> $tutor->experience_of_tuition,
+                      'current_tuition'=> $tutor->current_tuition,
+                       'available_start_time'=> $tutor->available_start_time,
+                       'available_end_time'=> $tutor->available_end_time,
+                       'expert_in'=> $tutor->expert_in,
+                       'phone_number'=> $tutor->phone_number
+
+
+      ];
+       $pdf = PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('pages.guardian.PDF', $data);    
+  return $pdf->stream();
+       }
+
+
+
 
 
 

@@ -6,6 +6,7 @@ use App\Tutor;
 use App\Tuition;
 use App\Subject;
 use App\User;
+use App\Guardian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash; 
 class TutorController extends Controller
@@ -17,11 +18,14 @@ class TutorController extends Controller
      */
     public function index()
     {
+       $id=session()->get('userid');
         $tuitions=Tuition::all();
         $subjects=Subject::all();
-        return view('pages.tutor.tutioncircular')->with('tuitions',$tuitions)->with('subjects',$subjects);
-    }
+        $tutor=Tutor::where('id',$id)->first();
 
+        return view('pages.tutor.tutioncircular')->with('tuitions',$tuitions)->with('subjects',$subjects)->with('tutor',$tutor);
+    }
+ 
     /**
      * Show the form for creating a new resource.
      *
@@ -60,10 +64,18 @@ class TutorController extends Controller
         $tutor->areas=$request->area;
         $tutor->educational_qualification=$request->qualification;
         $tutor->profession=$request->profession;
-        $file=$request->file('id_card');
-       
-        $file->store('public/files/tutor');
-        $tutor->id_card=$file;
+        $id_card_front_part=$request->id_card_front_part;
+        $front_part=rand().'.'.$id_card_front_part->getClientOriginalExtension();
+        Image::make($id_card_front_part)->save('images/tutors/Id_card/'.$front_part);
+        $tutor->id_card_front_part= $front_part;
+
+         $id_card_back_part=$request->id_card_back_part;
+        $back_part=rand().'.'.$id_card_back_part->getClientOriginalExtension();
+        Image::make($id_card_back_part)->save('images/tutors/Id_card/'.$back_part);
+        $tutor->id_card_back_part=$back_part;
+
+
+      
         $tutor->experience_of_tuition=$request->experience;
         $tutor->current_tuition=$request->current_tuition;
         $tutor->available_start_time=$request->available_start_time;
@@ -82,6 +94,11 @@ class TutorController extends Controller
 
         
     }
+  public function guardiandetails($id)
+    {
+         $guardian=Guardian::where('id',$id)->first();  
+   return view('pages.guardian.profile')->with('guardian',$guardian);
+       }
 
     
 

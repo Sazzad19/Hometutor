@@ -14,7 +14,10 @@ class CreateGuardianreviewsTable extends Migration
     public function up()
     {
         Schema::create('guardianreviews', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
+             $table->integer('guardian_id');
+              $table->integer('ratting');
+               $table->text('feedback');
             $table->timestamps();
         });
     }

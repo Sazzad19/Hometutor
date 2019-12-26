@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Guardian;
 use App\Tutor;
 use App\Student;
+use App\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -40,6 +41,44 @@ class ProfileController extends Controller
     return view('pages.student.profile')->with('student',$student);}
         
     }
+  public function updateguardianprofile(Request $request , $id)
+    {
 
+  $guardian=Guardian::where('id',$id)->first();
+  $user=User::where('id',$guardian->user_id)->first(); 
+  $user->name=$request->name;
+  $guardian->username=$request->username;
+    $guardian->profession=$request->profession;
+   $guardian->phone_number=$request->phone_number;
+     $guardian->address=$request->address;
+ $guardian->save();
+   $user->save();
+
+return redirect()->back();
+
+    }
+
+    public function updatetutorprofile(Request $request , $id)
+    {
+
+  $tutor=Tutor::where('id',$id)->first();
+  $user=User::where('id',$tutor->user_id)->first(); 
+  $user->name=$request->name;
+  $tutor->username=$request->username;
+  $tutor->profession=$request->profession;
+  $tutor->educational_qualification=$request->educational_qualification;
+  $tutor->phone_number=$request->phone_number;
+  $tutor->expert_in=$request->expert_in;
+  $tutor->areas=$request->areas;
+  $tutor->experience_of_tuition=$request->experience_of_tuition;
+  $tutor->current_tuition=$request->current_tuition;
+  $tutor->available_start_time=$request->available_start_time;
+  $tutor->available_end_time=$request->available_end_time;
+  $tutor->save();
+  $user->save();
+
+return redirect()->back();
+
+    }
    
 }

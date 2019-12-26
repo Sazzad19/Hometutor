@@ -18,7 +18,8 @@ Route::post('/login-post','PageController@loginpost')->name('login.post');
 Route::get('/logout','PageController@logout')->name('logout');
 
 Route::get('/my-profile','ProfileController@profile')->name('profile');
-Route::post('/send','SendEmailController@sendemail')->name('sendemail');
+Route::post('/send-to-tutor','SendEmailController@send_to_tutor_email')->name('sendemailtutor');
+Route::post('/send-to-guardian','SendEmailController@send_to_guardian_email')->name('sendemailguardian');
 Route::get('/email','SendEmailController@index')->name('email');
 
 
@@ -32,8 +33,10 @@ Route::get('/tutor-tuitions','TutorController@index')->name('tutor.index');
 
 Route::post('/tutor-store','TutorController@store')->name('tutor.store');
 
-Route::get('/tutor-profile','TutorController@profile')->name('tutor.profile');
+Route::post('/tutor-feedback','GuardianreviewsController@storefeedback')->name('tutor.feedback');
 
+Route::get('/guardian-details/{id}','TutorController@guardiandetails')->name('tutor.guardian-details');
+Route::post('/updateprofile/{id}','ProfileController@updatetutorprofile')->name('tutor.updateprofile');
 });
 
 Route::group(['prefix'=>'guardian'],function(){
@@ -44,13 +47,23 @@ Route::get('/guardian-tutors','GuardianController@index')->name('guardian.index'
 Route::post('/guardian-store','GuardianController@store')->name('guardian.store');
 
 Route::get('/tutor-details/{id}','GuardianController@tutordetails')->name('guardian.tutor-details');
-Route::get('/guardian-profile','GuardianController@profile')->name('guardian.profile');
+
+Route::post('/updateprofile/{id}','ProfileController@updateguardianprofile')->name('guardian.updateprofile');
+
+Route::get('/profilePDF/{id}','GuardianController@printPDF')->name('guardian.profilePDF');
+
 Route::get('/tuitionlist/{id}','TuitionController@tuitionlist')->name('guardian.tuitionlist');
+
 Route::get('/createtuition','TuitionController@createtuition')->name('guardian.createtuition');
+
 Route::post('/storetuition','TuitionController@storetuition')->name('guardian.storetuition');
 Route::get('/edittuition','TuitionController@edittuition')->name('guardian.edittuition');
+
 Route::get('/updatetuition','TuitionController@updatetuition')->name('guardian.updatetuition');
+
 Route::get('/deletetuition','TuitionController@deletetuition')->name('guardian.deletetuition');
+
+Route::post('/guardian-feedback','TutorreviewsController@storefeedback')->name('guardian.feedback');
 
 });
 
