@@ -17,6 +17,7 @@ class SendEmailController extends Controller
  
 
       public function send_to_tutor_email(Request $request){
+      	
 
  $data = array(
  	'to' => $request->to ,

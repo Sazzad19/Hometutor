@@ -42,11 +42,11 @@
 					<b>Tutor gender preference :</b> {{$tuition->t_gender}}
 					
 					<br>
-					<span><b>Subjects : </b>@foreach($subjects as $subject)
-                     @if($subject->tuition_id==$tuition->id)
+					<span><b>Subjects : </b>@foreach($tuition->subjects as $subject)
+                  
                      {{$subject->t_subject}}
                  
-                      @endif
+               
 					@endforeach</span>
 					<p><b>Tutoring Time:</b>{{$tuition->time}}</p>
 					<div class="row">
@@ -187,6 +187,25 @@
 
 			<div class="pull-right mt-2 mb-5 d-none d-sm-block"><ul role="navigation" class="pagination"><li aria-disabled="true" aria-label="« Previous" class="page-item disabled"><span aria-hidden="true" class="page-link">‹</span></li> <li aria-current="page" class="page-item active"><span class="page-link">1</span></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=2" class="page-link">2</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=3" class="page-link">3</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=4" class="page-link">4</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=5" class="page-link">5</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=6" class="page-link">6</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=7" class="page-link">7</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=8" class="page-link">8</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=2" rel="next" aria-label="Next »" class="page-link">Next</a></li></ul></div>
 		</div>
+    <div class="col-md-3">
+<h5>Search Your Desired Tuition</h5>
+<form class="form-inline md-form mr-auto mb-4" action="{{route('tutor.search')}}" method="post">
+   {{ csrf_field() }}
+  <select class="form-control mr-sm-2" style="width: 183px;" type="text" name="class">
+    <option value="">Class</option>
+  <option value="Class I">Class I</option>
+  <option value="Class II" >Class II</option> <option value="Class III">Class III</option> <option value="Class IV" >Class IV</option> <option value="Class V" >Class V</option> <option value="Class VI" >Class VI</option> <option value="Class VII" >Class VII</option> <option value="Class VIII">Class VIII</option> <option value="Class IX" >Class IX</option> <option value="S.S.C" >S.S.C</option> <option value="HSC 1st year" >HSC 1st year</option> <option value="HSC 2nd year">HSC 2nd year</option> <option value="Honours 1st year" >Honours 1st year</option> <option value="Honours 2nd year" >Honours 2nd year</option> <option value="Honours 3rd year">Honours 3rd year</option> <option value="Honours 4th year">Honours 4th year</option> <option value="Masters">Masters</option> <option value="Nursery" >Nursery</option> <option value="Dakhil" >Dakhil</option> <option value="Alim" >Alim</option> <option value="Fazil" >Fazil</option> <option value="Kamil" >Kamil</option> <option value="O Lavel">O Lavel</option> <option value="A Lavel" >A Lavel</option> <option value="KG" >KG</option>
+  </select>
+  <input class="form-control mr-sm-2" type="text" placeholder="Subject" name="subject" >
+  <input class="form-control mr-sm-2" type="text" placeholder="Medium" name="medium" >
+  <input class="form-control mr-sm-2" type="text" placeholder="Tutor Gender" name="gender" >
+  <input class="form-control mr-sm-2" type="text" placeholder="Area" name="area">
+  <input class="form-control mr-sm-2" type="text" placeholder="Salary Range" name="salary">     
+   <input class="form-control mr-sm-2" type="text" placeholder="Tuition time" name="time">  
+  <button type="submit" class="btn btn-primary btn-rounded">Search</button>
+</form>      
+
+    </div>
 	</div>
 
 

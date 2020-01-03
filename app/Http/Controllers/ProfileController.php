@@ -80,5 +80,25 @@ return redirect()->back();
 return redirect()->back();
 
     }
+
+     public function updatestudentprofile(Request $request , $id)
+    {
+
+  $student=Student::where('id',$id)->first();
+ 
+ 
+ 
+  
+        $student->class=$request->class;
+        $student->medium=$request->medium;
+    
+        $student->educational_institution=$request->edu_institution;
+        $student->academic_result=$request->result;
+  $student->save();
+
+
+return redirect()->back();
+
+    }
    
 }

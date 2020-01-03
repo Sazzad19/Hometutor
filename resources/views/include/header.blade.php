@@ -10,11 +10,11 @@
     <meta name="keywords" content="">
         <title>Hometutor</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- <link rel="stylesheet" href="css/bootstrap3.min.css"> -->
     <link rel="stylesheet" href="{{asset('css/profile.css')}}" >
-    <link rel="stylesheet" type="text/css" href="{{asset('css/all.css')}}">
+    <link rel="stylesheet" href="{{asset('css/all.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
@@ -27,10 +27,10 @@
 
 
 
-   <script src="https://sdk.accountkit.com/bn_IN/sdk.js?hash=ba25cb317094c73dcd6a56b11e9b5d7f" async="" crossorigin="anonymous"></script>
-   <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script>
-   <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-107514519-1"></script>
-   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ 
  
   </head>
 

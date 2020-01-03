@@ -37,6 +37,8 @@ Route::post('/tutor-feedback','GuardianreviewsController@storefeedback')->name('
 
 Route::get('/guardian-details/{id}','TutorController@guardiandetails')->name('tutor.guardian-details');
 Route::post('/updateprofile/{id}','ProfileController@updatetutorprofile')->name('tutor.updateprofile');
+Route::post('/search','TutorController@search')->name('tutor.search');
+
 });
 
 Route::group(['prefix'=>'guardian'],function(){
@@ -65,6 +67,8 @@ Route::get('/deletetuition','TuitionController@deletetuition')->name('guardian.d
 
 Route::post('/guardian-feedback','TutorreviewsController@storefeedback')->name('guardian.feedback');
 
+Route::post('/search','GuardianController@search')->name('guardian.search');
+
 });
 
 Route::group(['prefix'=>'student'],function(){
@@ -72,6 +76,9 @@ Route::group(['prefix'=>'student'],function(){
 Route::get('/student-tuors','StudentController@index')->name('student.index');
 
 Route::post('/student-store','StudentController@store')->name('student.store');
+
+Route::post('/updateprofile/{id}','ProfileController@updatestudentprofile')->name('student.updateprofile');
+
 });
 
 
@@ -81,9 +88,7 @@ Route::get('/blog-post','BlogController@postview')->name('blog.postview');
 });
 
 
-Route::get('/registrationGS',function(){
-	return view('pages.registrationGS');
-})->name('pages.registrationGS');
+Route::get('/registrationGS','StudentController@registrationpage')->name('pages.registrationGS');
 
 
 

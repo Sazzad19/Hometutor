@@ -24,6 +24,12 @@
           <a class="nav-link" href="{{route('guardian.index')}}">Hire a tutor</a>
         </li>
         @endif
+       @if(session()->get('userrole')=='student')
+        <li>
+          <a class="nav-link" href="{{route('guardian.index')}}">Recommand a tutor</a>
+        </li>
+        @endif
+
           @if(session()->get('userrole')=='tutor')
         <li>
           <a class="nav-link" href="{{route('tutor.index')}}">Tuition Jobs</a> 

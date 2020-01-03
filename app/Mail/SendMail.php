@@ -27,7 +27,7 @@ class SendMail extends Mailable
      *
      * @return $this
      */
-    public function build()
+    public function build() 
     {
           if(session()->get('userrole')=='guardian'){
         return $this->from('shakilahmedzx@gmail.com')->subject('Tutor Request')->view('pages.email')->with('data',$this->data);}

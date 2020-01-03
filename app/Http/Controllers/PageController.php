@@ -42,9 +42,14 @@ return redirect()->route('tutor.index');
 return redirect()->route('guardian.index');
 
  }
- elseif($student=Student::where('user_id',$user->id)->first()){
+  elseif($student=Student::where('user_id',$user->id)->first()){
+ $request->session()->put('login','true');
+ $request->session()->put('userid',$student->id);
+ $request->session()->put('userrole','student');
+return redirect()->route('student.index');
 
- } 
+ }
+ 
 }
 else{
 	return redirect()->route('login')->with('message','Wrong Password');

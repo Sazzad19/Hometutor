@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 use Image;
+use App\User;
 use App\Student;
+use App\Guardian;
+use App\Tutor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,8 +18,17 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return view('pages.tutor.index');
+        $tutor=Tutor::all();
+
+        return view('pages.student.index')->with('tutors',$tutor);
     }
+  public function registrationpage()
+
+    {
+        $guardian=Guardian::all();
+        return view('pages.registrationGS')->with('guardian',$guardian);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -52,13 +64,15 @@ class StudentController extends Controller
 ]);
 
 
-
+        $user=new User;
         $student=new Student;
+        $user->name=$request->name;
+         $user->email=$request->email;
+         $user->password= Hash::make($request->password);
+         $user->save();
 
-
-        $student->name=$request->name;
+         $student->user_id=User::all()->last()->id;
         $student->username=$request->username;
-        $student->email=$request->email;
         $img=$request->photo;
         $image=time().'.'.$img->getClientOriginalExtension();
         $location='images/students/'.$image;
@@ -71,11 +85,14 @@ class StudentController extends Controller
         $student->educational_institution=$request->edu_institution;
         $student->academic_result=$request->result;
         $student->guardian_id=$request->guardian;
-        $student->password= Hash::make($request->password);
+      
 
 
         $student->save();
-
+        $request->session()->put('login','true');
+        $request->session()->put('userid',$student->id);
+        $request->session()->put('userrole','student');
+        return redirect()->route('guardian.index');
 
 
     }

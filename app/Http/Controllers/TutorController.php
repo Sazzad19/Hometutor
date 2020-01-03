@@ -11,34 +11,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash; 
 class TutorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
        $id=session()->get('userid');
         $tuitions=Tuition::all();
-        $subjects=Subject::all();
+      
         $tutor=Tutor::where('id',$id)->first();
 
-        return view('pages.tutor.tutioncircular')->with('tuitions',$tuitions)->with('subjects',$subjects)->with('tutor',$tutor);
+        return view('pages.tutor.tutioncircular')->with('tuitions',$tuitions)->with('tutor',$tutor);
     }
  
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-  
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
 
@@ -102,46 +86,81 @@ class TutorController extends Controller
 
     
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tutor  $tutor
-     * @return \Illuminate\Http\Response
-     */
+    public function search(Request $request)
+    {
+       $id=session()->get('userid');
+       $tutor=Tutor::where('id',$id)->first(); 
+     
+      $subjresult=Subject::query();
+      $result = Tuition::query();
+         $class=$request->class;
+         $subject=$request->subject;
+         $medium=$request->medium;
+         $gender=$request->gender;
+         $area=$request->area;
+         $salary=$request->salary;
+         $time=$request->time;
+
+
+if (!empty($subject)) {
+   $subjresult = $subjresult->where('t_subject',$subject);
+    $subjresult= $subjresult->get();
+    foreach ($subjresult as $subject) {
+        $result= $result->where('id', $subject->tuition_id);
+    }
+
+}
+
+if (!empty($gender)) {
+    $result = $result->where('t_gender', $gender);
+}
+
+if (!empty($medium)) {
+    $result = $result->where('s_medium','like', '%'.$medium.'%');
+}
+
+if ($class!=NULL) {
+    $result = $result->where('s_class', $class);
+}
+
+if (!empty($area)) {
+    $result = $result->where('s_area','like', '%'.$area.'%');
+}
+
+if (!empty($salary)) {
+    $result = $result->where('t_salary',$salary);
+}
+
+if (!empty($time)) {
+   $result = $result->where('time',$time);
+}
+
+$result=$result->get();
+
+return view('pages.tutor.tutioncircular')->with('tuitions',$result)->with('tutor',$tutor)->with('success','Searching Completed');
+
+    }
+
+
+
     public function show(Tutor $tutor)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Tutor  $tutor
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Tutor $tutor)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Tutor  $tutor
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, Tutor $tutor)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Tutor  $tutor
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Tutor $tutor)
     {
         //

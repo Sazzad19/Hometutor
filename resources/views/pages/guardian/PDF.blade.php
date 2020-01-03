@@ -16,26 +16,57 @@ th, td {
 
 
 
-<h2>Tutor Informations</h2>
+<h2 style="text-align: center;">Tutor Informations</h2>
 
 <table style="width:100%">
+<tr>
+    <th>Photo:</th>
+    <td> <img src="http://localhost/Hometutor/public/images/tutors/{{$photo}}" style="height: 160px; width: 160px;"></td>
+  </tr>
+
   <tr>
     <th>Name:</th>
     <td>{{$name}}</td>
   </tr>
-
-  <tr>
-    <th>Email:</th>
-    <td>{{$email}}</td>
-  </tr>
-  <tr>
+ <tr>
     <th>Gender:</th>
     <td>{{$gender}}</td>
   </tr>
   <tr>
-    <th>Photo:</th>
-    <td><img src="{{asset('images/tutors/'.$photo)}}"></td>
+    <th>Educational Qualification:</th>
+    <td>{{$educational_qualification}}</td>
   </tr>
+   <tr>
+    <th>Profession:</th>
+    <td>{{$profession}}</td>
+  </tr>
+   <tr>
+    <th>Expert In:</th>
+    <td>{{$gender}}</td>
+  </tr>
+ <tr>
+    <th>Experience of Tuition:</th>
+    <td>{{$experience_of_tuition}}</td>
+  </tr>
+ <tr>
+    <th>Current Tuition:</th>
+    <td>{{$current_tuition}}</td>
+  </tr>
+
+  <tr>
+    <th>Available Time:</th>
+    <td>{{$available_start_time}} To {{$available_end_time}}</td>
+  </tr>
+  <tr>
+    <th>Email:</th>
+    <td>{{$email}}</td>
+  </tr>
+ 
+<tr>
+    <th>Phone Number:</th>
+    <td>{{$phone_number}}</td>
+  </tr>
+ 
 </table>
 
 </body>

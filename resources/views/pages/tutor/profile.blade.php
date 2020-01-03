@@ -63,7 +63,7 @@
                                  <li class="nav-item">
                                     <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Tuition Information</a>
                                 </li>
-                                 @if(session()->get('userrole')=='guardian')
+                                 @if(session()->get('userrole')=='guardian'||session()->get('userrole')=='student')
 
                                  <li class="nav-item">
                                     <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Reviews</a>
@@ -87,9 +87,9 @@
                     <div class="col-md-4">
                        @if(session()->get('userrole')=='guardian')
                        <div class="profile-img">
-                       
-                            <img src="{{asset('images/tutors/Id_card/'.$tutor->id_card_front_part)}}" alt=""/>
-                             <img src="{{asset('images/tutors/Id_card/'.$tutor->id_card_back_part)}}" alt=""/>
+                            <h4>ID Card</h4>
+                            <img data-toggle="modal" data-target="#IDfrontModal" src="{{asset('images/tutors/Id_card/'.$tutor->id_card_front_part)}}" alt=""/>
+                             <img data-toggle="modal" data-target="#IDbackModal" src="{{asset('images/tutors/Id_card/'.$tutor->id_card_back_part)}}" alt=""/>
                            
                         </div>
                         @endif
@@ -210,7 +210,7 @@
 
 
 
-                                            @if(session()->get('userrole')=='guardian')
+                                      @if(session()->get('userrole')=='guardian'||session()->get('userrole')=='student')
                              <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                                 <div class="row">
                                             <div class="col-md-6">
@@ -263,7 +263,77 @@
 
             </form> 
 
-             
+
+
+
+            <div class="modal fade" id="IDfrontModal" tabindex="-1" role="dialog" aria-labelledby="IDfrontModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ID Card<small>(Front Part)</small></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <form  action="{{route('guardian.feedback')}}" method="post"  >
+                                  {{ csrf_field() }}
+
+                             
+                               <div class="modal-body">
+                                <div class="form-group">
+                                <img  src="{{asset('images/tutors/Id_card/'.$tutor->id_card_front_part)}}" alt=""/>  
+                               </div>
+                         
+
+        
+                               
+                      
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+  
+
+
+
+              <div class="modal fade" id="IDbackModal" tabindex="-1" role="dialog" aria-labelledby="IDbackModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">ID Card<small>(Back Part)</small></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <form  action="{{route('guardian.feedback')}}" method="post"  >
+                                  {{ csrf_field() }}
+
+                             
+                               <div class="modal-body">
+                                <div class="form-group">
+                                <img  src="{{asset('images/tutors/Id_card/'.$tutor->id_card_back_part)}}" height="100%" width="100%" alt=""/>  
+                               </div>
+                         
+
+        
+                               
+                      
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       
+      </div>
+      </form>
+    </div>
+  </div>
+</div>         
 
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -536,6 +606,24 @@
                    
                             </div>
                             @endif
+                             @if(session()->get('userrole')=='student')
+                  <div class="row">
+                    <div class="col-md-4">
+                    </div>
+
+            <div class="col-md-6">
+            <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Recommand To Your Parent
+            </button>
+            </div>
+            <div class="col-md-2">
+                
+
+                    </div>
+                   
+                            </div>
+                            @endif
+                   
                    
         </div>
 

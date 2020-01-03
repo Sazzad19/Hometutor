@@ -129,10 +129,11 @@
                                         <div class="form-group">
                                             <label>Guardian</label>
                                             <select class="form-control" name="guardian">
-                                                <option class="hidden"  selected disabled>Select</option>
-                                                <option value="1">Masum</option>
-                                                <option value="2">Akib</option>
-                                                <option value="3">Taifur</option>
+                                                <option class="hidden" selected="1"  disabled>Select</option>
+                                                @foreach($guardian as $guardian)
+                                                <option value="{{$guardian->id}}">{{$guardian->user->name}}</option>
+                                                
+                                                @endforeach
                                             </select>
                                         </div>
 
