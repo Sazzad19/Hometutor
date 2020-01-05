@@ -85,6 +85,7 @@ Route::post('/updateprofile/{id}','ProfileController@updatestudentprofile')->nam
 Route::group(['prefix'=>'blog'],function(){
 Route::get('/','BlogController@index')->name('blog.index');
 Route::get('/blog-post','BlogController@postview')->name('blog.postview');
+Route::post('/store','BlogController@storepost')->name('blog.store');
 });
 
 
@@ -99,3 +100,10 @@ Route::get('/registrationTU',function(){
 })->name('pages.registrationTU');
 });
 
+Route::group(['prefix'=>'admin'],function(){
+
+Route::get('/',function(){
+	return view('admin.pages.index');
+})->name('admin.index');
+
+});

@@ -53,9 +53,10 @@
 
       <!-- Sidebar Widgets Column -->
       <div class="col-md-4">
-
         <!-- Search Widget -->
         <div class="card my-4">
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addpost">Add Post</button>
+
           <h5 class="card-header">Search</h5>
           <div class="card-body">
             <div class="input-group">
@@ -128,5 +129,51 @@
 
   </div>
   <!-- /.container -->
+<div class="modal fade" id="addpost" tabindex="-1" role="dialog" aria-labelledby="addpost" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Your Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <form  action="{{route('blog.store')}}" method="post" >
+                                  {{ csrf_field() }}
 
+                             <div class="modal-body">
+                                
+
+                                <div class="form-group">
+                                <label style="font-weight: bold;">Title</label>
+                            <input type="text" name="title"  class="form-control ">
+                               </div>
+                         
+
+        
+                                <div class="form-group">
+                                <label  style="font-weight: bold;">Ctagory</label>
+                                 <select name="catagory" class="form-control days">
+                                              <option value="">Select Ctagory</option> <option value="1 Day/Week">1 Day/Week</option> <option value="2 Days/Week">2 Days/Week</option> <option value="3 Days/Week">3 Days/Week</option> <option value="4 Days/Week">4 Days/Week</option> <option value="5 Days/Week">5 Days/Week</option> <option value="6 Days/Week">6 Days/Week</option> <option value="7 Days/Week">7 Days/Week</option></select>
+                             
+                               </div>
+                               <div class="form-group">
+                                <label style="font-weight: bold;">Image</label>
+                           <input type="file" class="form-control" name="image" />
+                               </div>
+
+                      <div class="form-group">
+                                <label style="font-weight: bold;">Text</label>
+                            <textarea type="text" name="body"  class="form-control ">
+                               </textarea>
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" >Save</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
   @endsection

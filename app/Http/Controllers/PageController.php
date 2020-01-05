@@ -7,11 +7,13 @@ use App\User;
 use App\Tutor;
 use App\Guardian;
 use App\Student;
+use App\Tuition;
 class PageController extends Controller
 {
    public function index(){
-
- return view('pages.index');
+     $tuitions=Tuition::orderBy('id', 'DESC')->take(3)->get();
+     $tutor=Tutor::orderBy('id', 'DESC')->take(4)->get();
+ return view('pages.index')->with('tuitions', $tuitions)->with('tutors', $tutor);
 
    }
 

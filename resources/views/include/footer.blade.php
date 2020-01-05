@@ -3,7 +3,7 @@
       <div class="footer__box">
         <!-- Logo -->
         <a class="logo" href="#">
-            <img  alt="logo">
+           
         </a>
 
         <div class="social">
@@ -12,7 +12,7 @@
             <a href="#0"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
         </div>
 
-        <p>&copy; 2018 Dejithemes. All Rights Reserved.</p>
+        <p>&copy; 2020 Hometutor.com. All Rights Reserved.</p>
       </div>
     </div>
 

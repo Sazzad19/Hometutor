@@ -14,34 +14,7 @@ use PDF;
 class GuardianController extends Controller
 {
   
- public function printPDF($id)
-    {
- set_time_limit(300);
-       $tutor=Tutor::where('id',$id)->first();
 
-
-
-
-      $data=[
-       
-    'name'=> $tutor->user->name,
-     'email'=> $tutor->user->email,
-      
-       'photo'=> $tutor->photo,
-        'gender'=> $tutor->gender,
-         'areas'=> $tutor->areas,
-          'educational_qualification'=> $tutor->educational_qualification,
-           'profession'=> $tutor->profession,
-            'experience_of_tuition'=> $tutor->experience_of_tuition,
-             'current_tuition'=> $tutor->current_tuition,
-              'available_start_time'=> $tutor->available_start_time,
-               'available_end_time'=> $tutor->available_end_time,
-                'expert_in'=> $tutor->expert_in,
-                 'phone_number'=> $tutor->phone_number
-];
-       $pdf = PDF::loadView('pages.guardian.PDF', $data);    
-        return $pdf->download('Tutor.pdf');
-       }
 
 
 
@@ -153,6 +126,35 @@ return view('pages.guardian.index')->with('tutors',$result);
     }
 
 
+
+ public function printPDF($id)
+    {
+ set_time_limit(300);
+       $tutor=Tutor::where('id',$id)->first();
+
+
+
+
+      $data=[
+       
+    'name'=> $tutor->user->name,
+     'email'=> $tutor->user->email,
+      
+       'photo'=> $tutor->photo,
+        'gender'=> $tutor->gender,
+         'areas'=> $tutor->areas,
+          'educational_qualification'=> $tutor->educational_qualification,
+           'profession'=> $tutor->profession,
+            'experience_of_tuition'=> $tutor->experience_of_tuition,
+             'current_tuition'=> $tutor->current_tuition,
+              'available_start_time'=> $tutor->available_start_time,
+               'available_end_time'=> $tutor->available_end_time,
+                'expert_in'=> $tutor->expert_in,
+                 'phone_number'=> $tutor->phone_number
+];
+       $pdf = PDF::loadView('pages.guardian.PDF', $data);    
+        return $pdf->download('Tutor.pdf');
+       }
 
 
 

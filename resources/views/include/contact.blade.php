@@ -7,8 +7,7 @@
           <div class="row">
             <div class="col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0">
               <h1 class="contact-heading">Lets Get In Touch</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum illum ratione atque praesentium laudantium
-                quaerat laborum consecteturLorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p>Please Feel Free to Inform Us About Any Issues Regarding This Website</p>
 
                 <div class="row margin-15px-bottom">
                     <div class="col-sm-1 no-padding">
@@ -17,7 +16,7 @@
                         </div>
                     </div>
                     <div class="col-sm-11">
-                        <p class="text-small">San Francisco, CA 560 Bush St &amp; 20th Ave,<br> Apt 5 San Francisco, 230909</p>
+                        <p class="text-small">Mohammadpur, Dhaka</p>
                     </div>
                 </div>
 
@@ -39,7 +38,7 @@
                         </div>
                     </div>
                     <div class="col-sm-11 xs-margin-50px-bottom">
-                        <p class="text-small">email@demo.com<br>www.demo.com</p>
+                        <p class="text-small">hometutor@demo.com<br>www.hometutor.com</p>
                     </div>
                 </div>
 

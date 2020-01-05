@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Blog;
+use Image;
+use App\Blogpost;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -37,9 +37,21 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storepost(Request $request)
     {
-        //
+        $blogpost=new Blogpost;
+  
+        $blogpost->title=$request->title;
+         $blogpost->catagory=$request->catagory;
+        $blogpost->body=$request->body;
+         
+        $blog_image=time().'.'.$request->image->getClientOriginalExtension();
+        $location='images/blogpost_image/'.$blog_image;
+        Image::make($request->image)->save($location);
+        $blogpost->image=$blog_image;
+        
+ $blogpost->save();
+ return redirect()->route('blog.index');
     }
 
     /**

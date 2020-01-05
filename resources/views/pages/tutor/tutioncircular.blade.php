@@ -20,7 +20,7 @@
 			$i++;
 			@endphp
 
-			<div class="card my-4 tuition-list">
+			<div class="card my-4 tuition-list"> 
 				<div class="card-header pt-3 pb-0 my-0">
 					<h6 class="font-weight-bold float-left">{{$tuition->title}}</h6>
 					<p class="float-right">Posted By- <a href="{{route('tutor.guardian-details',$tuition->guardian->id)}}">{{$tuition->guardian->user->name}}</a></p>

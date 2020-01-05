@@ -163,13 +163,13 @@
                                         <div class="card">
                                             <h5 class="bg-custom text-light py-3 pl-3">HELP &amp; INFO</h5>
                                              <div class="p-2">
-                                                <strong>Q. How can i get the desired tutor ?</strong>
+                                                <strong>Q. How can i get my prospective tutor ?</strong>
                                                  <p class="mt-1 text-secondary">
-                        Just fill up the Request for a tutor form and submit request.Available teachers will contact with you.
+                        Just fill up the Tuition form and submit it.  After submit the form the information will be sent to Hometutor.com support team. They will review / verify the info and will publish on the available tuitions section.
                     </p>
-                     <strong>Q. What will happen after fill the forms ?</strong>
+                     <strong>Q. What will happen after submit the form ?</strong>
                       <p class="mt-1 text-secondary text-justify">
-                        After submit the form the information will be sent to Hometutor.com support team. They will review / verify the info and will publish on the available tuitions section.
+                       Available teachers will contact with you.
                     </p>
                 </div>
             </div> 
