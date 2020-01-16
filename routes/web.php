@@ -59,15 +59,16 @@ Route::get('/tuitionlist/{id}','TuitionController@tuitionlist')->name('guardian.
 Route::get('/createtuition','TuitionController@createtuition')->name('guardian.createtuition');
 
 Route::post('/storetuition','TuitionController@storetuition')->name('guardian.storetuition');
-Route::get('/edittuition','TuitionController@edittuition')->name('guardian.edittuition');
+Route::get('/edittuition/{id}','TuitionController@edittuition')->name('guardian.edittuition');
 
-Route::get('/updatetuition','TuitionController@updatetuition')->name('guardian.updatetuition');
+Route::post('/updatetuition/{id}','TuitionController@updatetuition')->name('guardian.updatetuition');
 
-Route::get('/deletetuition','TuitionController@deletetuition')->name('guardian.deletetuition');
+Route::get('/deletetuition/{id}','TuitionController@deletetuition')->name('guardian.deletetuition');
 
 Route::post('/guardian-feedback','TutorreviewsController@storefeedback')->name('guardian.feedback');
 
 Route::post('/search','GuardianController@search')->name('guardian.search');
+
 
 });
 
@@ -84,8 +85,9 @@ Route::post('/updateprofile/{id}','ProfileController@updatestudentprofile')->nam
 
 Route::group(['prefix'=>'blog'],function(){
 Route::get('/','BlogController@index')->name('blog.index');
-Route::get('/blog-post','BlogController@postview')->name('blog.postview');
+Route::get('/blog-post/{id}','BlogController@postview')->name('blog.postview');
 Route::post('/store','BlogController@storepost')->name('blog.store');
+Route::get('/blog-category/{id}','BlogController@category_posts')->name('blog.category');
 });
 
 
@@ -102,8 +104,13 @@ Route::get('/registrationTU',function(){
 
 Route::group(['prefix'=>'admin'],function(){
 
-Route::get('/',function(){
-	return view('admin.pages.index');
-})->name('admin.index');
+Route::get('/','AdminController@index')->name('admin.index');
+
+Route::get('/tutorlist','AdminController@tutorlist')->name('admin.tutorlist');
+Route::get('/approve_tutor/{id}','AdminController@tutor_approval')->name('admin.tutor.approve');
+Route::get('/delete_tutor/{id}','AdminController@tutor_destroy')->name('admin.tutor.destroy');
+Route::get('/tutionlist','AdminController@tuitionlist')->name('admin.tutionlist');
+Route::get('/approve_tuition/{id}','AdminController@tuition_approval')->name('admin.tuition.approve');
+Route::get('/delete_tuition/{id}','AdminController@tution_destroy')->name('admin.tuition.destroy');
 
 });

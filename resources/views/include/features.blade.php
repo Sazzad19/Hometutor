@@ -1,4 +1,4 @@
-<div id="features">
+<div id="features" >
      <div class="text-center features-caption features">
                 <h3>Welcome To Our Hometutor.com</h3>
                  
@@ -40,11 +40,10 @@
               </div>
             </div>
      </div>
-      <div class="features-section-2">
-        <div class="container-fluid">
+     
+     
 
-          <div class="row">
-         <div class="col-sm main-col">
+     
               <div class="features-section-2-col-2__content">
                 <h2>Recent Tuitions</h2>
 
@@ -67,6 +66,7 @@
               <b class="text-primary">Student Gender :</b>{{$tuition->s_gender}}
             </div>
           </div>
+         
           <b>{{$tuition->t_days}}</b><br>
           <b>Salary : {{$tuition->t_salary}}/-</b><br>
          <span> <b>Tutor gender preference :</b> {{$tuition->t_gender}}</span>
@@ -81,8 +81,7 @@
           <p><b>Tutoring Time:</b>{{$tuition->time}}</p><br>
           
                <span> <i class="fa fa-map-marker fa-lg"::before></i>{{$tuition->s_area}},{{$tuition->s_districts}}</span>
-             
-         
+       
           <div class="row"><div class="col-md-6"><small class="pull-left">Other Informations -{{$tuition->additional_info}}</small></div> <div class="col-md-6"><small class="pull-right">
                                         Posted on:{{$tuition->created_at}}
                                     </small></div></div>
@@ -100,19 +99,14 @@
 
                   
                   
-              </div>
-            </div>
+              
            
           </div>
-        </div>
-      </div>
+       
+     
 <div class="hire"><p>Search A Suitable Tuition For You</p>
-<button onclick="window.location.href ='{{route('pages.registrationTU')}}';" >Search Tuitions(It's Free)</button></div>
-       <div class="features-section-2">
-        <div class="container-fluid">
-          <div class="row">
-          
-            <div class="col-sm main-col">
+<button class="btn " onclick="window.location.href ='{{route('pages.registrationTU')}}';">Search Tuitions(It's Free)</button></div>
+      
               <div class="features-section-2-col-2__content">
                 <h2>Latest Tutors</h2>
                   <div class="row main-content">
@@ -144,12 +138,9 @@
                   
                   </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>   
+            
 
 
 <div class="hire"><p>Hire The Best Tutor for Your Children</p>
-<button onclick="window.location.href ='{{route('pages.registrationGS')}}';" >Find Tutors(It's Free)</button></div>
+<button class="btn"  onclick="window.location.href ='{{route('pages.registrationGS')}}';" >Find Tutors(It's Free)</button></div>
   </div>

@@ -15,7 +15,7 @@ class CreateTuitionsTable extends Migration
     {
         Schema::create('tuitions', function (Blueprint $table) {
              $table->increments('id');
-              
+              $table->string('title');
               $table->string('s_fullName');
                 $table->string('s_gender');
                   $table->string('s_college');

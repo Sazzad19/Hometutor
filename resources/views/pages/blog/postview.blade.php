@@ -11,41 +11,27 @@
       <div class="col-lg-8">
 
         <!-- Title -->
-        <h1 class="mt-4">Post Title</h1>
+        <h1 class="mt-4">{{$post->title}}</h1>
 
         <!-- Author -->
         <p class="lead">
           by
-          <a href="#">Start Bootstrap</a>
+          <a >{{$post->name}}</a>
         </p>
 
         <hr>
 
         <!-- Date/Time -->
-        <p>Posted on January 1, 2019 at 12:00 PM</p>
+        <p>Posted on {{$post->created_at}}</p>
 
         <hr>
 
         <!-- Preview Image -->
-        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">
+        <img class="img-fluid rounded" src="{{asset('images/blogpost_image/'.$post->image)}}" alt="" height="500px" width="500">
 
         <hr>
+<p>{{$post->body}}</p>
 
-        <!-- Post Content -->
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, vero, obcaecati, aut, error quam sapiente nemo saepe quibusdam sit excepturi nam quia corporis eligendi eos magni recusandae laborum minus inventore?</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, tenetur natus doloremque laborum quos iste ipsum rerum obcaecati impedit odit illo dolorum ab tempora nihil dicta earum fugiat. Temporibus, voluptatibus.</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, doloribus, dolorem iusto blanditiis unde eius illum consequuntur neque dicta incidunt ullam ea hic porro optio ratione repellat perspiciatis. Enim, iure!</p>
-
-        <blockquote class="blockquote">
-          <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-          
-        </blockquote>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, nostrum, aliquid, animi, ut quas placeat totam sunt tempora commodi nihil ullam alias modi dicta saepe minima ab quo voluptatem obcaecati?</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, dolor quis. Sunt, ut, explicabo, aliquam tenetur ratione tempore quidem voluptates cupiditate voluptas illo saepe quaerat numquam recusandae? Qui, necessitatibus, est!</p>
 
         <hr>
 
@@ -104,6 +90,9 @@
 
         <!-- Search Widget -->
         <div class="card my-4">
+              @if(session()->get('userrole'))
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addpost">Add Post</button>
+@endif
           <h5 class="card-header">Search</h5>
           <div class="card-body">
             <div class="input-group">
@@ -122,39 +111,23 @@
             <div class="row">
               <div class="col-lg-6">
                 <ul class="list-unstyled mb-0">
+                   @foreach($post_categories as $post_category)
                   <li>
-                    <a href="#">Web Design</a>
+                    <a href="{{route('blog.category',$post_category->id)}}">{{$post_category->name}}</a>
                   </li>
-                  <li>
-                    <a href="#">HTML</a>
-                  </li>
-                  <li>
-                    <a href="#">Freebies</a>
-                  </li>
+                 @endforeach
                 </ul>
               </div>
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">JavaScript</a>
-                  </li>
-                  <li>
-                    <a href="#">CSS</a>
-                  </li>
-                  <li>
-                    <a href="#">Tutorials</a>
-                  </li>
-                </ul>
-              </div>
+       
             </div>
           </div>
         </div>
 
         <!-- Side Widget -->
         <div class="card my-4">
-          <h5 class="card-header">Side Widget</h5>
+          <h5 class="card-header"></h5>
           <div class="card-body">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+           
           </div>
         </div>
 
@@ -165,5 +138,58 @@
 
   </div>
   <!-- /.container -->
+<div class="modal fade" id="addpost" tabindex="-1" role="dialog" aria-labelledby="addpost" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Your Post</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <form  action="{{route('blog.store')}}" method="post" enctype="multipart/form-data" >
+                                  {{ csrf_field() }}
 
+                             <div class="modal-body">
+                                
+                          
+                               
+                            <input type="text" name="user_id"  class="form-control" hidden="1" value="" />
+                          
+                                <div class="form-group">
+                                <label style="font-weight: bold;">Title</label>
+                            <input type="text" name="title"  class="form-control "/>
+                               </div>
+                         
+
+        
+                                <div class="form-group">
+                                <label  style="font-weight: bold;">Ctagory</label>
+                                 <select name="catagory" class="form-control days">
+                                  <option value="">Select Category</option>
+                                  @foreach($post_categories as $post_category)
+                                          <option value="{{$post_category->id}}">{{$post_category->name}}</option>
+                                              @endforeach
+                                            </select>
+                             
+                               </div>
+                               <div class="form-group">
+                                <label style="font-weight: bold;">Image</label>
+                           <input type="file" class="form-control" name="image" />
+                               </div>
+
+                      <div class="form-group">
+                                <label style="font-weight: bold;">Text</label>
+                            <textarea type="text" name="body"  class="form-control ">
+                               </textarea>
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" >Save</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
   @endsection

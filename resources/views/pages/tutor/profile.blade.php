@@ -15,10 +15,12 @@
                         <div class="profile-img">
                        
                             <img src="{{asset('images/tutors/'.$tutor->photo)}}" alt="Profile Picture" style="height: 160px; width:245px;" />
+                            @if(session()->get('userrole')=='tutor')
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
                             </div>
+                            @endif
                         </div>
                         
 

@@ -14,10 +14,12 @@
                         <div class="profile-img">
                        
                             <img src="{{asset('images/guardians/'.$guardian->photo)}}" alt=""/>
+                                 @if(session()->get('userrole')=='guardian')
                             <div class="file btn btn-lg btn-primary">
                                 Change Photo
                                 <input type="file" name="file"/>
                             </div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -161,7 +163,7 @@
                                                 <label>Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{$student->name}}</p>
+                                                <p>{{$student->user->name}}</p>
                                             </div>
                                         </div>
                                          <div class="row">
@@ -177,7 +179,7 @@
                                                 <label>Email</label>
                                                 </div>
                                             <div class="col-md-6">
-                                                <p>{{$student->email}}</p>
+                                                <p>{{$student->user->email}}</p>
                                             </div>
                                         </div>
                                         <div class="row">

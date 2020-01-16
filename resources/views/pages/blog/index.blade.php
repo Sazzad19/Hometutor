@@ -9,44 +9,21 @@
    <div id="blog" class="row"> 
 
 <div class="col-md-8 blogShort">
-
-                     <h1>Title 1</h1>
-                     <img src="{{asset('img/6.jpg')}}" height="100px" weight="200px">
+ @foreach($posts as $post)
+                     <h1>{{$post->title}}</h1>
+                     <img src="{{asset('images/blogpost_image/'.$post->image)}}" height="100px" weight="200px">
                      
                         
-                <article><p>
-                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-                 ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only 
-                 five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-                 of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-                 Lorem Ipsum.    
+                <article><p>{{\Illuminate\Support\Str::limit($post->body,500, $end='...')}}
                  </p></article>
-                  <a class="btn btn-blog pull-right marginBottom10" href="{{route('blog.postview')}}">READ MORE</a> 
+                  <a class="btn btn-blog pull-right marginBottom10" href="{{route('blog.postview',$post->id)}}">READ MORE</a> 
            
 
-  
-                     <h1>Title 2</h1>
-                     <img src="{{asset('img/5.jpg')}}" height="100px" weight="200px">
-                     <article><p>
-                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-                         ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only 
-                         five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-                         of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-                         Lorem Ipsum.
-                         </p></article>
-                     <a class="btn btn-blog pull-right marginBottom10" href="{{route('blog.postview')}}">READ MORE</a> 
+  @endforeach
+                    
                  
 
-                   <h1>Title 3</h1>
-                     <img src="{{asset('img/5.jpg')}}" height="100px" weight="200px">
-                     <article><p>
-                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
-                         ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only 
-                         five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release
-                         of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-                         Lorem Ipsum.
-                         </p></article>
-                    <a class="btn btn-blog pull-right marginBottom10" href="{{route('blog.postview')}}">READ MORE</a> 
+                   
 
       </div>
 
@@ -55,8 +32,9 @@
       <div class="col-md-4">
         <!-- Search Widget -->
         <div class="card my-4">
+           @if(session()->get('userrole'))
          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addpost">Add Post</button>
-
+@endif
           <h5 class="card-header">Search</h5>
           <div class="card-body">
             <div class="input-group">
@@ -75,30 +53,15 @@
             <div class="row">
               <div class="col-lg-6">
                 <ul class="list-unstyled mb-0">
+                  @foreach($post_categories as $post_category)
                   <li>
-                    <a href="#">Web Design</a>
+                    <a href="{{route('blog.category',$post_category->id)}}">{{$post_category->name}}</a>
                   </li>
-                  <li>
-                    <a href="#">HTML</a>
-                  </li>
-                  <li>
-                    <a href="#">Freebies</a>
-                  </li>
+                 @endforeach
+                  
                 </ul>
               </div>
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">JavaScript</a>
-                  </li>
-                  <li>
-                    <a href="#">CSS</a>
-                  </li>
-                  <li>
-                    <a href="#">Tutorials</a>
-                  </li>
-                </ul>
-              </div>
+        
             </div>
           </div>
         </div>
@@ -108,16 +71,13 @@
           <h5 class="card-header">Latest Posts</h5>
           <div class="card-body">
               <ul class="list-unstyled mb-0">
+                 @foreach($latest_posts as $latest_post)
                    <li>
-                    <a href="#">Title of my post</a>
+                    <a href="{{route('blog.postview',$latest_post->id)}}">{{$latest_post->title}}</a>
                    </li>
-
-                    <li>
-                    <a href="#">Title of my post</a>
-                   </li>
-                   <li>
-                    <a href="#">Title of my post</a>
-                   </li>
+      @endforeach
+                 
+                   
                  </ul>
           </div>
         </div>
@@ -138,15 +98,23 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-       <form  action="{{route('blog.store')}}" method="post" >
+       <form  action="{{route('blog.store')}}" method="post" enctype="multipart/form-data" >
                                   {{ csrf_field() }}
 
                              <div class="modal-body">
                                 
-
+                          
+                               
+                            <input type="text" name="user_id"  class="form-control" hidden="1" value="" />
+                            <div class="form-group">
+                                <label style="font-weight: bold;">Your Name</label>
+                            <input type="text" name="name"  class="form-control "/>
+                               </div>
+                         
+                          
                                 <div class="form-group">
                                 <label style="font-weight: bold;">Title</label>
-                            <input type="text" name="title"  class="form-control ">
+                            <input type="text" name="title"  class="form-control "/>
                                </div>
                          
 
@@ -154,7 +122,11 @@
                                 <div class="form-group">
                                 <label  style="font-weight: bold;">Ctagory</label>
                                  <select name="catagory" class="form-control days">
-                                              <option value="">Select Ctagory</option> <option value="1 Day/Week">1 Day/Week</option> <option value="2 Days/Week">2 Days/Week</option> <option value="3 Days/Week">3 Days/Week</option> <option value="4 Days/Week">4 Days/Week</option> <option value="5 Days/Week">5 Days/Week</option> <option value="6 Days/Week">6 Days/Week</option> <option value="7 Days/Week">7 Days/Week</option></select>
+                                  <option value="">Select Category</option>
+                                  @foreach($post_categories as $post_category)
+                          <option value="{{$post_category->id}}">{{$post_category->name}}</option>
+                                              @endforeach
+                                            </select>
                              
                                </div>
                                <div class="form-group">

@@ -4,7 +4,7 @@
             <!-- User Info -->
             <div class="user-info">
                 <div class="image">
-                    <img src="images/user.png" width="48" height="48" alt="User" />
+                    <img src="{{asset('backend/images/user.png')}}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</div>
@@ -35,15 +35,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="pages/typography.html">
+                        <a href="{{route('admin.tutorlist')}}">
                             <i class="material-icons">text_fields</i>
-                            <span>Tutor Requests</span>
+                            <span>Tutor List</span>
                         </a>
                     </li>
                     <li>
-                        <a href="pages/helper-classes.html">
+                        <a href="{{route('admin.tutionlist')}}">
                             <i class="material-icons">layers</i>
-                            <span>Tuition Requests</span>
+                            <span>Tuition List</span>
                         </a>
                     </li>
                 

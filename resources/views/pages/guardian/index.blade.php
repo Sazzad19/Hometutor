@@ -35,8 +35,8 @@
                   </div>
               </div>
             </div>
-<div class="col-md-2" >
-   <h3>Search Your Desired Tutors</h3>
+<div class="col-md-2" style="background-color: #116466; color:white ; border-radius: 1em " >
+   <h3 class="text-center">Search Your Desired Tutors</h3>
   <form class="form-inline md-form mr-auto mb-4" action="{{route('guardian.search')}}" method="post">
    {{ csrf_field() }}
   <input class="form-control mr-sm-2" type="text"  placeholder="Subject" name="subject">
@@ -45,9 +45,15 @@
   <input class="form-control mr-sm-2" type="text" placeholder="Profession" name="profession" >
   <input class="form-control mr-sm-2" type="text" placeholder="Experience" name="experience">
   <input class="form-control mr-sm-2" type="text" placeholder="Qualification" name="qualification">     
-  
-  <button type="submit" class="btn btn-primary btn-rounded">Search</button>
+ 
+  <button type="submit" class="btn btn-success" style="display: inline-block; margin-left: 40px; margin-bottom: 10px;" >Search Tutor</button>
+
 </form>
+
+ <h4 class="text-center">Cann't Find Your Desired Tutor??</h4>
+ <button  type="button" class="btn btn-success" style="display: inline-block; margin-left: 27px; margin-bottom: 10px;"  onclick="window.location.href = '{{route('guardian.createtuition')}}';">Post Your Tuition</button> 
+
+</div>
 </div>
 
           </div>

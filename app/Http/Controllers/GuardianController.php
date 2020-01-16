@@ -20,7 +20,7 @@ class GuardianController extends Controller
 
     public function index()
     {
-      $tutor=Tutor::all();
+      $tutor=Tutor::where('status',1)->get();
 
         return view('pages.guardian.index')->with('tutors',$tutor);
     }

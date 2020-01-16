@@ -55,7 +55,16 @@
         @endif
             @if((session()->get('login')))
            <li>
-          <a class="nav-link" href="{{route('profile')}}">My Profile</a>
+        <a class="nav-link" style="width: 85px;" href="{{route('profile')}}"> <img src="{{asset('images/SeekPng.com_profile-icon-png_9665493.png')}}" height="25px" width="32px"></a>
+         <ul>
+           <li>
+             <a class="nav-link" href="{{route('profile')}}">My Profile</a>
+           </li>
+           <li>
+              <a class="nav-link" href="{{route('logout')}}">LogOut</a>
+           </li>
+
+         </ul>
         </li>
         @endif
        @if(!(session()->get('login')))
@@ -63,11 +72,7 @@
           <a class="nav-link" href="{{route('login')}}">Login</a>
         </li>
       @endif
-       @if((session()->get('login')))
-        <li>
-          <a class="nav-link" href="{{route('logout')}}">LogOut</a>
-        </li>
-      @endif
+     
       </ul>
     </div>
   </nav>

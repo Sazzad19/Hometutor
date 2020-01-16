@@ -9,8 +9,8 @@
   <p>{{$message}}</p>
 </div>
     @endif
-	<div class="row">
-		<div class="col-md-9">
+	<div class="row" style="margin-left:0px;margin-right: 0px; ">
+		<div class="col-md-9" >
 			@php
 			$i=0;
 			@endphp
@@ -37,8 +37,9 @@
 							<b class="text-primary">Student Gender :</b>{{$tuition->s_gender}}
 						</div>
 					</div>
+<div class="text-center">
 					<b>{{$tuition->t_days}}</b><br>
-					<b>Salary : </b>{{$tuition->t_salary}}/-
+					<b>Salary : </b>{{$tuition->t_salary}}/-<br>
 					<b>Tutor gender preference :</b> {{$tuition->t_gender}}
 					
 					<br>
@@ -55,19 +56,18 @@
 								<i class="fa fa-map-marker fa-lg"::before></i>{{$tuition->s_area}},{{$tuition->s_districts}}
 							</h6>
 						</div>
-						<div class="col-md"><a href="#" class="btn btn-sm btn-custom text-light pull-right"><i class="fa fa-link"></i> Details tuition
-                                    </a></div>
+					</div>
 
 					</div>
-					<div class="row mt-2"><small class="col-md-9">Other Information -{{$tuition->additional_info}}</small> <div class="col-md-3"><small class="pull-right">
+				 <div class="row"><div class="col-md-6"><small class="pull-left">Other Informations -{{$tuition->additional_info}}</small></div> <div class="col-md-6"><small class="pull-right">
                                         Posted on:{{$tuition->created_at}}
                                     </small></div></div>
 
                     
 
 
-				</div>
-				<div class="row mt-2"><small class="col-md-10"></small> <div class="col-md-2"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#apply_{{$i}}">Apply</button>     </div></div>
+				</div> 
+			 <div class="text-center"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#apply_{{$i}}">Apply</button>  </div>
 			</div>
 
 			<div class="modal fade" id="apply_{{$i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -187,11 +187,12 @@
 
 			<div class="pull-right mt-2 mb-5 d-none d-sm-block"><ul role="navigation" class="pagination"><li aria-disabled="true" aria-label="« Previous" class="page-item disabled"><span aria-hidden="true" class="page-link">‹</span></li> <li aria-current="page" class="page-item active"><span class="page-link">1</span></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=2" class="page-link">2</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=3" class="page-link">3</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=4" class="page-link">4</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=5" class="page-link">5</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=6" class="page-link">6</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=7" class="page-link">7</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=8" class="page-link">8</a></li> <li class="page-item"><a href="https://deshtutor.com/tuition_list?page=2" rel="next" aria-label="Next »" class="page-link">Next</a></li></ul></div>
 		</div>
-    <div class="col-md-3">
-<h5>Search Your Desired Tuition</h5>
-<form class="form-inline md-form mr-auto mb-4" action="{{route('tutor.search')}}" method="post">
+    <div class="col-md-3"   >
+      <div style="background-color: #116466; color:white ; border-radius: 1em " >
+<h3 class="text-center" style="padding-top: 15px;">Search Your Desired Tuition</h3>
+<form class="form-inline md-form mr-auto mb-4" action="{{route('tutor.search')}}" method="post" style="margin-left: 32px;">
    {{ csrf_field() }}
-  <select class="form-control mr-sm-2" style="width: 183px;" type="text" name="class">
+  <select class="form-control mr-sm-2" style="width: 186px;" type="text" name="class">
     <option value="">Class</option>
   <option value="Class I">Class I</option>
   <option value="Class II" >Class II</option> <option value="Class III">Class III</option> <option value="Class IV" >Class IV</option> <option value="Class V" >Class V</option> <option value="Class VI" >Class VI</option> <option value="Class VII" >Class VII</option> <option value="Class VIII">Class VIII</option> <option value="Class IX" >Class IX</option> <option value="S.S.C" >S.S.C</option> <option value="HSC 1st year" >HSC 1st year</option> <option value="HSC 2nd year">HSC 2nd year</option> <option value="Honours 1st year" >Honours 1st year</option> <option value="Honours 2nd year" >Honours 2nd year</option> <option value="Honours 3rd year">Honours 3rd year</option> <option value="Honours 4th year">Honours 4th year</option> <option value="Masters">Masters</option> <option value="Nursery" >Nursery</option> <option value="Dakhil" >Dakhil</option> <option value="Alim" >Alim</option> <option value="Fazil" >Fazil</option> <option value="Kamil" >Kamil</option> <option value="O Lavel">O Lavel</option> <option value="A Lavel" >A Lavel</option> <option value="KG" >KG</option>
@@ -202,9 +203,10 @@
   <input class="form-control mr-sm-2" type="text" placeholder="Area" name="area">
   <input class="form-control mr-sm-2" type="text" placeholder="Salary Range" name="salary">     
    <input class="form-control mr-sm-2" type="text" placeholder="Tuition time" name="time">  
-  <button type="submit" class="btn btn-primary btn-rounded">Search</button>
+   <div style="padding-top: 10px;">
+ <button type="submit" class="btn btn-success" style="display: inline-block; margin-left: 56px; margin-bottom: 10px; ">Search</button></div>
 </form>      
-
+</div>
     </div>
 	</div>
 

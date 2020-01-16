@@ -5,7 +5,7 @@
 @include('admin.include.header') 
 
 
-<body class="theme-red">
+<body class="theme-blue">
 <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
@@ -29,6 +29,7 @@
 @include('admin.include.nav')
 
 @include('admin.include.leftsidebar')
+
 @yield('content')
 
 

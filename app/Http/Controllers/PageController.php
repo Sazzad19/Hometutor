@@ -8,12 +8,14 @@ use App\Tutor;
 use App\Guardian;
 use App\Student;
 use App\Tuition;
+use App\Blogpost;
 class PageController extends Controller
 {
    public function index(){
      $tuitions=Tuition::orderBy('id', 'DESC')->take(3)->get();
      $tutor=Tutor::orderBy('id', 'DESC')->take(4)->get();
- return view('pages.index')->with('tuitions', $tuitions)->with('tutors', $tutor);
+      $blogposts=Blogpost::orderBy('id', 'DESC')->take(3)->get();
+ return view('pages.index')->with('tuitions', $tuitions)->with('tutors', $tutor)->with('blogposts', $blogposts);
 
    }
 

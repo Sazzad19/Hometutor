@@ -14,7 +14,7 @@ class TuitionController extends Controller
         $tuition=Tuition::where('guardian_id',$id)->get();
 
           $subject=Subject::all();
-   return view('pages.guardian.postedtuitions')->with('tuitions',$tuition)->with('subjects',$subject);
+   return view('pages.guardian.Mytuition')->with('tuitions',$tuition)->with('subjects',$subject);
     }
 
 
@@ -78,9 +78,10 @@ return redirect()->route('guardian.createtuition')->with('success','Tuition Post
      * @param  \App\Tuition  $tuition
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tuition $tuition)
+    public function edittuition($id)
     {
-        //
+       $tuition=Tuition::find($id);
+        return view('pages.guardian.edittuition')->with('tuition',$tuition);
     }
 
     /**
@@ -90,9 +91,25 @@ return redirect()->route('guardian.createtuition')->with('success','Tuition Post
      * @param  \App\Tuition  $tuition
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tuition $tuition)
+    public function updatetuition(Request $request,$id)
     {
-        //
+         $tuition=Tuition::find($id);
+
+ $tuition->title=$request->title;
+ $tuition->s_fullName=$request->s_fullName;
+ $tuition->s_gender=$request->s_gender;
+ $tuition->s_college=$request->s_college;
+ $tuition->s_medium=$request->s_medium;
+ $tuition->s_class=$request->s_class;
+
+ $tuition->s_districts=$request->s_districts;
+ $tuition->s_area=$request->s_area;
+ $tuition->s_address=$request->s_address;
+ $tuition->t_gender=$request->t_gender;
+ $tuition->t_days=$request->t_days;    
+ $tuition->additional_info=$request->additional_info;
+ $tuition->save();
+ return redirect()->route('guardian.tuitionlist',$tuition->guardian_id)->with('success','Tuition Updated Successsfully');
     }
 
     /**
@@ -101,8 +118,10 @@ return redirect()->route('guardian.createtuition')->with('success','Tuition Post
      * @param  \App\Tuition  $tuition
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tuition $tuition)
+    public function deletetuition($id)
     {
-        //
+          $tuition=Tuition::find($id);
+          $tuition->delete();
+          return redirect()->route('guardian.tuitionlist',$tuition->guardian_id)->with('success','Tuition Deleted Successsfully');
     }
 }

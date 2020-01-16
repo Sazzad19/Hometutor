@@ -10,7 +10,17 @@
 			<div class="card my-4 tuition-list">
 				<div class="card-header pt-3 pb-0 my-0">
 					<h6 class="font-weight-bold float-left">{{$tuition->title}}</h6>
-					<p class="float-right">ID:#{{$tuition->id}}</p>
+		<a href="#" class="btn btn-primary a-btn-slide-text pull-right">
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        <span><strong>Edit</strong></span>            
+    </a>
+       <a href="#" class="btn btn-primary a-btn-slide-text pull-right">
+       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        <span><strong>Delete</strong></span>            
+    </a>
+
+
+				
 				</div>
 				<div class="card-body">
 					<div class="row py-1">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Image;
 use App\Blogpost;
+use App\Post_category;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -13,8 +14,14 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+
     {
-        return view('pages.blog.index');
+        $post_categories=Post_category::all();
+        $posts=Blogpost::all();
+       $latest_posts=Blogpost::orderBy('id', 'DESC')->take(3)->get();
+      
+
+        return view('pages.blog.index')->with('post_categories',$post_categories)->with('posts',$posts)->with('latest_posts',$latest_posts);
     }
 
     /**
@@ -22,9 +29,11 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function postview()
+     public function postview($id)
     {
-         return view('pages.blog.postview');
+        $post_categories=Post_category::all();
+        $post=Blogpost::where('id',$id)->first();
+         return view('pages.blog.postview')->with('post',$post)->with('post_categories',$post_categories);
     }
     public function create()
     {
@@ -40,10 +49,11 @@ class BlogController extends Controller
     public function storepost(Request $request)
     {
         $blogpost=new Blogpost;
-  
-        $blogpost->title=$request->title;
+        $blogpost->name=$request->name;
+         $blogpost->title=$request->title;
          $blogpost->catagory=$request->catagory;
-        $blogpost->body=$request->body;
+         $blogpost->body=$request->body;
+         $blogpost->user_id=$request->user_id;
          
         $blog_image=time().'.'.$request->image->getClientOriginalExtension();
         $location='images/blogpost_image/'.$blog_image;
@@ -60,9 +70,13 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blog)
+   public function category_posts($id)
     {
-        //
+      $post_categories=Post_category::all();
+          $posts=Blogpost::where('category',$id)->get();
+     $latest_posts=Blogpost::orderBy('id', 'DESC')->take(3)->get();
+
+        return view('pages.blog.index')->with('post_categories',$post_categories)->with('posts',$posts)->with('latest_posts',$latest_posts);  
     }
 
     /**
