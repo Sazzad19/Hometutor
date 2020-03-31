@@ -11,60 +11,120 @@
 |
 */
 
-Route::get('/','User\PageController@index')->name('index');
+Route::get('/','PageController@index')->name('index');
+Route::get('/contact','PageController@contact')->name('contact');
+Route::get('/login','PageController@login')->name('login');
+Route::post('/login-post','PageController@loginpost')->name('login.post');
+Route::get('/logout','PageController@logout')->name('logout');
 
-Route::get('/contact','User\PageController@contact')->name('contact');
-
-
-
-/*
-Products Route
-All the routes for our products for users
-*/
-
-Route::get('/products','User\ProductController@index')->name('products');
-Route::get('/products/{slug}','User\ProductController@show')->name('products.show');
-Route::get('/search','User\PageController@search')->name('search');
+Route::get('/my-profile','ProfileController@profile')->name('profile');
+Route::post('/send-to-tutor','SendEmailController@send_to_tutor_email')->name('sendemailtutor');
+Route::post('/send-to-guardian','SendEmailController@send_to_guardian_email')->name('sendemailguardian');
+Route::post('/recommend-to-guardian','SendEmailController@recommend_to_guardian_email')->name('recommendguardian');
+Route::get('/email','SendEmailController@index')->name('email');
 
 
-//Admin Routes
-Route::group(['prefix'=>'admin'],function(){
-
-Route::get('/','Admin\PageController@index')->name('admin.index');
-
-//Admin Product Routes
-
-Route::get('/products/create','Admin\ProductController@create')->name('admin.products.create');
-
-Route::post('/products/store','Admin\ProductController@store')->name('admin.products.store');
-Route::get('/products','Admin\ProductController@index')->name('admin.products');
-Route::get('/products/edit/{id}','Admin\ProductController@edit')->name('admin.products.edit');
-Route::post('/products/update/{id}','Admin\ProductController@update')->name('admin.products.update');
-Route::post('/products/delete/{id}','Admin\ProductController@delete')->name('admin.products.delete');
 
 
-Route::get('/catagory/create','Admin\CatagoryController@create')->name('admin.catagory.create');
+Route::group(['prefix'=>'tutor'],function(){
+Route::post('/tutor-store','TutorController@store')->name('tutor.store');	
 
-Route::post('/catagory/store','Admin\CatagoryController@store')->name('admin.catagory.store');
-Route::get('/catagory','Admin\CatagoryController@index')->name('admin.catagory');
-Route::get('/catagory/edit/{id}','Admin\CatagoryController@edit')->name('admin.catagory.edit');
-Route::post('/catagory/update/{id}','Admin\CatagoryController@update')->name('admin.catagory.update');
-Route::post('/catagory/delete/{id}','Admin\CatagoryController@delete')->name('admin.catagory.delete');
+Route::group(['middleware'=>['checkuserlogin']],function(){
 
- 
+Route::get('/tutor-tuitions','TutorController@index')->name('tutor.index');
 
-Route::get('/brand/create','Admin\BrandController@create')->name('admin.brand.create');
 
-Route::post('/brand/store','Admin\BrandController@store')->name('admin.brand.store');
-Route::get('/brand','Admin\BrandController@index')->name('admin.brand');
-Route::get('/brand/edit/{id}','Admin\BrandController@edit')->name('admin.brand.edit');
-Route::post('/brand/update/{id}','Admin\BrandController@update')->name('admin.brand.update');
-Route::post('/brand/delete/{id}','Admin\BrandController@delete')->name('admin.brand.delete');
+
+Route::post('/tutor-feedback','GuardianreviewsController@storefeedback')->name('tutor.feedback');
+
+Route::get('/guardian-details/{id}','TutorController@guardiandetails')->name('tutor.guardian-details');
+Route::post('/updateprofile/{id}','ProfileController@updatetutorprofile')->name('tutor.updateprofile');
+Route::get('/search','TutorController@search')->name('tutor.search');
+});
+});
+
+Route::group(['prefix'=>'guardian'],function(){
+Route::post('/guardian-store','GuardianController@store')->name('guardian.store');
+Route::group(['middleware'=>['checkuserlogin']],function(){
+	
+Route::get('/guardian-tutors','GuardianController@index')->name('guardian.index');
+
+Route::get('/tutor-details/{id}','GuardianController@tutordetails')->name('guardian.tutor-details');
+
+Route::post('/updateprofile/{id}','ProfileController@updateguardianprofile')->name('guardian.updateprofile');
+
+Route::get('/profilePDF/{id}','GuardianController@printPDF')->name('guardian.profilePDF');
+
+Route::get('/tuitionlist/{id}','TuitionController@tuitionlist')->name('guardian.tuitionlist');
+
+Route::get('/createtuition','TuitionController@createtuition')->name('guardian.createtuition');
+
+Route::post('/storetuition','TuitionController@storetuition')->name('guardian.storetuition');
+Route::get('/edittuition/{id}','TuitionController@edittuition')->name('guardian.edittuition');
+
+Route::post('/updatetuition/{id}','TuitionController@updatetuition')->name('guardian.updatetuition');
+
+Route::get('/deletetuition/{id}','TuitionController@deletetuition')->name('guardian.deletetuition');
+
+Route::post('/guardian-feedback','TutorreviewsController@storefeedback')->name('guardian.feedback');
+
+Route::get('/search','GuardianController@search')->name('guardian.search');
+
+});
+});
+
+Route::group(['prefix'=>'student'],function(){ 
+Route::post('/student-store','StudentController@store')->name('student.store');
+Route::group(['middleware'=>['checkuserlogin']],function(){
+
+Route::get('/student-tuors','StudentController@index')->name('student.index');
+
+
+
+Route::post('/updateprofile/{id}','ProfileController@updatestudentprofile')->name('student.updateprofile');
+
+Route::get('/tutor-details/{id}','StudentController@tutordetails')->name('student.tutor-details');
 
 });
 
 
 
+});
+
+Route::group(['prefix'=>'blog'],function(){
+Route::get('/','BlogController@index')->name('blog.index');
+Route::get('/blog-post/{id}','BlogController@postview')->name('blog.postview');
+Route::post('/store','BlogController@storepost')->name('blog.store');
+Route::get('/blog-category/{id}','BlogController@category_posts')->name('blog.category');
+});
+
+
+Route::get('/registrationGS','StudentController@registrationpage')->name('pages.registrationGS');
 
 
 
+
+
+Route::get('/registrationTU',function(){
+	return view('pages.registrationTU');
+})->name('pages.registrationTU');
+
+
+Route::group(['prefix'=>'admin'],function(){
+Route::get('/login-form','AdminController@loginform')->name('admin.loginform');
+Route::post('/login','AdminController@login')->name('admin.login');
+
+Route::group(['middleware'=>['checkadminlogin']],function(){
+
+Route::get('/login','AdminController@logout')->name('admin.logout');
+Route::get('/','AdminController@index')->name('admin.index');
+
+Route::get('/tutorlist','AdminController@tutorlist')->name('admin.tutorlist');
+Route::get('/approve_tutor/{id}','AdminController@tutor_approval')->name('admin.tutor.approve');
+Route::get('/delete_tutor/{id}','AdminController@tutor_destroy')->name('admin.tutor.destroy');
+Route::get('/tutionlist','AdminController@tuitionlist')->name('admin.tutionlist');
+Route::get('/approve_tuition/{id}','AdminController@tuition_approval')->name('admin.tuition.approve');
+Route::get('/delete_tuition/{id}','AdminController@tution_destroy')->name('admin.tuition.destroy');
+
+});
+});
